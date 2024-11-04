@@ -8,11 +8,8 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
-        <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="css/filter.css">
-<link rel="stylesheet" href="css/nouislider.min.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
@@ -31,7 +28,6 @@
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
-        <script src="js/L.Control.Locate.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -41,27 +37,24 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
-        <script src="js/tailDT.js"></script>
-<script src="js/nouislider.min.js"></script>
-<script src="js/wNumb.js"></script>
         <script src="data/county_boundary_0.js"></script>
-        <script src="data/Kambi_Bulle_1.js"></script>
-        <script src="data/Kambi_Garba_2.js"></script>
-        <script src="data/Kiwanjani_A_3.js"></script>
-        <script src="data/Kiwanjani_B_4.js"></script>
+        <script src="data/ward_1.js"></script>
+        <script src="data/Tulloroba_2.js"></script>
+        <script src="data/Oldonyiro_3.js"></script>
+        <script src="data/Ngaremara_4.js"></script>
         <script src="data/Kulamawe_5.js"></script>
-        <script src="data/Ngaremara_6.js"></script>
-        <script src="data/Oldonyiro_7.js"></script>
-        <script src="data/Tulloroba_8.js"></script>
+        <script src="data/Kiwanjani_B_6.js"></script>
+        <script src="data/Kiwanjani_A_7.js"></script>
+        <script src="data/Kambi_Garba_8.js"></script>
+        <script src="data/Kambi_Bulle_9.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
         })
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -96,7 +89,6 @@
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
-        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
@@ -137,10 +129,10 @@
                 pane: 'pane_county_boundary_0',
                 opacity: 1,
                 color: 'rgba(77,175,74,1.0)',
-                dashArray: '',
+                dashArray: '24.0,12.0',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 6.0,
                 fillOpacity: 0,
                 interactive: false,
             }
@@ -159,16 +151,43 @@
         });
         bounds_group.addLayer(layer_county_boundary_0);
         map.addLayer(layer_county_boundary_0);
-        function pop_Kambi_Bulle_1(feature, layer) {
+        function pop_ward_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Lease_No_1'] !== null ? autolinker.link(feature.properties['Lease_No_1'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['SUM_Male'] !== null ? autolinker.link(feature.properties['SUM_Male'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['SUM_Female'] !== null ? autolinker.link(feature.properties['SUM_Female'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SUM_Total'] !== null ? autolinker.link(feature.properties['SUM_Total'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SUM_Househ'] !== null ? autolinker.link(feature.properties['SUM_Househ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Area'] !== null ? autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Acres'] !== null ? autolinker.link(feature.properties['Acres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Hectares'] !== null ? autolinker.link(feature.properties['Hectares'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ward'] !== null ? autolinker.link(feature.properties['ward'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['consituenc'] !== null ? autolinker.link(feature.properties['consituenc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['county'] !== null ? autolinker.link(feature.properties['county'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(feature.properties['Shape_Length'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
@@ -181,43 +200,49 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Kambi_Bulle_1_0() {
+        function style_ward_1_0() {
             return {
-                pane: 'pane_Kambi_Bulle_1',
+                pane: 'pane_ward_1',
                 opacity: 1,
-                color: 'rgba(228,26,28,1.0)',
+                color: 'rgba(77,175,74,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 1.0,
                 fillOpacity: 0,
                 interactive: false,
             }
         }
-        map.createPane('pane_Kambi_Bulle_1');
-        map.getPane('pane_Kambi_Bulle_1').style.zIndex = 401;
-        map.getPane('pane_Kambi_Bulle_1').style['mix-blend-mode'] = 'normal';
-        var layer_Kambi_Bulle_1 = new L.geoJson(json_Kambi_Bulle_1, {
+        map.createPane('pane_ward_1');
+        map.getPane('pane_ward_1').style.zIndex = 401;
+        map.getPane('pane_ward_1').style['mix-blend-mode'] = 'normal';
+        var layer_ward_1 = new L.geoJson(json_ward_1, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Kambi_Bulle_1',
-            layerName: 'layer_Kambi_Bulle_1',
-            pane: 'pane_Kambi_Bulle_1',
-            onEachFeature: pop_Kambi_Bulle_1,
-            style: style_Kambi_Bulle_1_0,
+            dataVar: 'json_ward_1',
+            layerName: 'layer_ward_1',
+            pane: 'pane_ward_1',
+            onEachFeature: pop_ward_1,
+            style: style_ward_1_0,
         });
-        bounds_group.addLayer(layer_Kambi_Bulle_1);
-        map.addLayer(layer_Kambi_Bulle_1);
-        function pop_Kambi_Garba_2(feature, layer) {
+        bounds_group.addLayer(layer_ward_1);
+        map.addLayer(layer_ward_1);
+        function pop_Tulloroba_2(feature, layer) {
             var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['LEASE_NO_1'] !== null ? autolinker.link(feature.properties['LEASE_NO_1'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
+                        <td colspan="2">' + (feature.properties['parcel_num'] !== null ? autolinker.link(feature.properties['parcel_num'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
                         <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(feature.properties['Shape_Length'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
@@ -230,43 +255,49 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Kambi_Garba_2_0() {
+        function style_Tulloroba_2_0() {
             return {
-                pane: 'pane_Kambi_Garba_2',
+                pane: 'pane_Tulloroba_2',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 1.0,
                 fillOpacity: 0,
                 interactive: false,
             }
         }
-        map.createPane('pane_Kambi_Garba_2');
-        map.getPane('pane_Kambi_Garba_2').style.zIndex = 402;
-        map.getPane('pane_Kambi_Garba_2').style['mix-blend-mode'] = 'normal';
-        var layer_Kambi_Garba_2 = new L.geoJson(json_Kambi_Garba_2, {
+        map.createPane('pane_Tulloroba_2');
+        map.getPane('pane_Tulloroba_2').style.zIndex = 402;
+        map.getPane('pane_Tulloroba_2').style['mix-blend-mode'] = 'normal';
+        var layer_Tulloroba_2 = new L.geoJson(json_Tulloroba_2, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Kambi_Garba_2',
-            layerName: 'layer_Kambi_Garba_2',
-            pane: 'pane_Kambi_Garba_2',
-            onEachFeature: pop_Kambi_Garba_2,
-            style: style_Kambi_Garba_2_0,
+            dataVar: 'json_Tulloroba_2',
+            layerName: 'layer_Tulloroba_2',
+            pane: 'pane_Tulloroba_2',
+            onEachFeature: pop_Tulloroba_2,
+            style: style_Tulloroba_2_0,
         });
-        bounds_group.addLayer(layer_Kambi_Garba_2);
-        map.addLayer(layer_Kambi_Garba_2);
-        function pop_Kiwanjani_A_3(feature, layer) {
+        bounds_group.addLayer(layer_Tulloroba_2);
+        map.addLayer(layer_Tulloroba_2);
+        function pop_Oldonyiro_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Lease_No_1'] !== null ? autolinker.link(feature.properties['Lease_No_1'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Parcel_No'] !== null ? autolinker.link(feature.properties['Parcel_No'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Area'] !== null ? autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(feature.properties['Shape_Length'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
@@ -279,43 +310,46 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Kiwanjani_A_3_0() {
+        function style_Oldonyiro_3_0() {
             return {
-                pane: 'pane_Kiwanjani_A_3',
+                pane: 'pane_Oldonyiro_3',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 1.0,
                 fillOpacity: 0,
                 interactive: false,
             }
         }
-        map.createPane('pane_Kiwanjani_A_3');
-        map.getPane('pane_Kiwanjani_A_3').style.zIndex = 403;
-        map.getPane('pane_Kiwanjani_A_3').style['mix-blend-mode'] = 'normal';
-        var layer_Kiwanjani_A_3 = new L.geoJson(json_Kiwanjani_A_3, {
+        map.createPane('pane_Oldonyiro_3');
+        map.getPane('pane_Oldonyiro_3').style.zIndex = 403;
+        map.getPane('pane_Oldonyiro_3').style['mix-blend-mode'] = 'normal';
+        var layer_Oldonyiro_3 = new L.geoJson(json_Oldonyiro_3, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Kiwanjani_A_3',
-            layerName: 'layer_Kiwanjani_A_3',
-            pane: 'pane_Kiwanjani_A_3',
-            onEachFeature: pop_Kiwanjani_A_3,
-            style: style_Kiwanjani_A_3_0,
+            dataVar: 'json_Oldonyiro_3',
+            layerName: 'layer_Oldonyiro_3',
+            pane: 'pane_Oldonyiro_3',
+            onEachFeature: pop_Oldonyiro_3,
+            style: style_Oldonyiro_3_0,
         });
-        bounds_group.addLayer(layer_Kiwanjani_A_3);
-        map.addLayer(layer_Kiwanjani_A_3);
-        function pop_Kiwanjani_B_4(feature, layer) {
+        bounds_group.addLayer(layer_Oldonyiro_3);
+        map.addLayer(layer_Oldonyiro_3);
+        function pop_Ngaremara_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['LEASE_NO_1'] !== null ? autolinker.link(feature.properties['LEASE_NO_1'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Parcel_No'] !== null ? autolinker.link(feature.properties['Parcel_No'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(feature.properties['Shape_Length'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
@@ -328,35 +362,38 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Kiwanjani_B_4_0() {
+        function style_Ngaremara_4_0() {
             return {
-                pane: 'pane_Kiwanjani_B_4',
+                pane: 'pane_Ngaremara_4',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 1.0,
                 fillOpacity: 0,
                 interactive: false,
             }
         }
-        map.createPane('pane_Kiwanjani_B_4');
-        map.getPane('pane_Kiwanjani_B_4').style.zIndex = 404;
-        map.getPane('pane_Kiwanjani_B_4').style['mix-blend-mode'] = 'normal';
-        var layer_Kiwanjani_B_4 = new L.geoJson(json_Kiwanjani_B_4, {
+        map.createPane('pane_Ngaremara_4');
+        map.getPane('pane_Ngaremara_4').style.zIndex = 404;
+        map.getPane('pane_Ngaremara_4').style['mix-blend-mode'] = 'normal';
+        var layer_Ngaremara_4 = new L.geoJson(json_Ngaremara_4, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Kiwanjani_B_4',
-            layerName: 'layer_Kiwanjani_B_4',
-            pane: 'pane_Kiwanjani_B_4',
-            onEachFeature: pop_Kiwanjani_B_4,
-            style: style_Kiwanjani_B_4_0,
+            dataVar: 'json_Ngaremara_4',
+            layerName: 'layer_Ngaremara_4',
+            pane: 'pane_Ngaremara_4',
+            onEachFeature: pop_Ngaremara_4,
+            style: style_Ngaremara_4_0,
         });
-        bounds_group.addLayer(layer_Kiwanjani_B_4);
-        map.addLayer(layer_Kiwanjani_B_4);
+        bounds_group.addLayer(layer_Ngaremara_4);
+        map.addLayer(layer_Ngaremara_4);
         function pop_Kulamawe_5(feature, layer) {
             var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Lease_No_1'] !== null ? autolinker.link(feature.properties['Lease_No_1'].toLocaleString()) : '') + '</td>\
                     </tr>\
@@ -364,7 +401,7 @@
                         <td colspan="2">' + (feature.properties['Reg_sectio'] !== null ? autolinker.link(feature.properties['Reg_sectio'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(feature.properties['Shape_Length'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
@@ -385,7 +422,7 @@
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 1.0,
                 fillOpacity: 0,
                 interactive: false,
             }
@@ -404,120 +441,19 @@
         });
         bounds_group.addLayer(layer_Kulamawe_5);
         map.addLayer(layer_Kulamawe_5);
-        function pop_Ngaremara_6(feature, layer) {
+        function pop_Kiwanjani_B_6(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Parcel_No'] !== null ? autolinker.link(feature.properties['Parcel_No'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Ngaremara_6_0() {
-            return {
-                pane: 'pane_Ngaremara_6',
-                opacity: 1,
-                color: 'rgba(228,26,28,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 4.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        map.createPane('pane_Ngaremara_6');
-        map.getPane('pane_Ngaremara_6').style.zIndex = 406;
-        map.getPane('pane_Ngaremara_6').style['mix-blend-mode'] = 'normal';
-        var layer_Ngaremara_6 = new L.geoJson(json_Ngaremara_6, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_Ngaremara_6',
-            layerName: 'layer_Ngaremara_6',
-            pane: 'pane_Ngaremara_6',
-            onEachFeature: pop_Ngaremara_6,
-            style: style_Ngaremara_6_0,
-        });
-        bounds_group.addLayer(layer_Ngaremara_6);
-        map.addLayer(layer_Ngaremara_6);
-        function pop_Oldonyiro_7(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Parcel_No'] !== null ? autolinker.link(feature.properties['Parcel_No'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Area'] !== null ? autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_Oldonyiro_7_0() {
-            return {
-                pane: 'pane_Oldonyiro_7',
-                opacity: 1,
-                color: 'rgba(228,26,28,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 4.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        map.createPane('pane_Oldonyiro_7');
-        map.getPane('pane_Oldonyiro_7').style.zIndex = 407;
-        map.getPane('pane_Oldonyiro_7').style['mix-blend-mode'] = 'normal';
-        var layer_Oldonyiro_7 = new L.geoJson(json_Oldonyiro_7, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_Oldonyiro_7',
-            layerName: 'layer_Oldonyiro_7',
-            pane: 'pane_Oldonyiro_7',
-            onEachFeature: pop_Oldonyiro_7,
-            style: style_Oldonyiro_7_0,
-        });
-        bounds_group.addLayer(layer_Oldonyiro_7);
-        map.addLayer(layer_Oldonyiro_7);
-        function pop_Tulloroba_8(feature, layer) {
-            var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['LEASE_NO_1'] !== null ? autolinker.link(feature.properties['LEASE_NO_1'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['parcel_num'] !== null ? autolinker.link(feature.properties['parcel_num'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Shape_Leng'] !== null ? autolinker.link(feature.properties['Shape_Leng'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(feature.properties['Shape_Length'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
@@ -530,33 +466,189 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Tulloroba_8_0() {
+        function style_Kiwanjani_B_6_0() {
             return {
-                pane: 'pane_Tulloroba_8',
+                pane: 'pane_Kiwanjani_B_6',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 4.0,
+                weight: 1.0,
                 fillOpacity: 0,
                 interactive: false,
             }
         }
-        map.createPane('pane_Tulloroba_8');
-        map.getPane('pane_Tulloroba_8').style.zIndex = 408;
-        map.getPane('pane_Tulloroba_8').style['mix-blend-mode'] = 'normal';
-        var layer_Tulloroba_8 = new L.geoJson(json_Tulloroba_8, {
+        map.createPane('pane_Kiwanjani_B_6');
+        map.getPane('pane_Kiwanjani_B_6').style.zIndex = 406;
+        map.getPane('pane_Kiwanjani_B_6').style['mix-blend-mode'] = 'normal';
+        var layer_Kiwanjani_B_6 = new L.geoJson(json_Kiwanjani_B_6, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Tulloroba_8',
-            layerName: 'layer_Tulloroba_8',
-            pane: 'pane_Tulloroba_8',
-            onEachFeature: pop_Tulloroba_8,
-            style: style_Tulloroba_8_0,
+            dataVar: 'json_Kiwanjani_B_6',
+            layerName: 'layer_Kiwanjani_B_6',
+            pane: 'pane_Kiwanjani_B_6',
+            onEachFeature: pop_Kiwanjani_B_6,
+            style: style_Kiwanjani_B_6_0,
         });
-        bounds_group.addLayer(layer_Tulloroba_8);
-        map.addLayer(layer_Tulloroba_8);
+        bounds_group.addLayer(layer_Kiwanjani_B_6);
+        map.addLayer(layer_Kiwanjani_B_6);
+        function pop_Kiwanjani_A_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lease_No_1'] !== null ? autolinker.link(feature.properties['Lease_No_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(feature.properties['Shape_Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Kiwanjani_A_7_0() {
+            return {
+                pane: 'pane_Kiwanjani_A_7',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Kiwanjani_A_7');
+        map.getPane('pane_Kiwanjani_A_7').style.zIndex = 407;
+        map.getPane('pane_Kiwanjani_A_7').style['mix-blend-mode'] = 'normal';
+        var layer_Kiwanjani_A_7 = new L.geoJson(json_Kiwanjani_A_7, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Kiwanjani_A_7',
+            layerName: 'layer_Kiwanjani_A_7',
+            pane: 'pane_Kiwanjani_A_7',
+            onEachFeature: pop_Kiwanjani_A_7,
+            style: style_Kiwanjani_A_7_0,
+        });
+        bounds_group.addLayer(layer_Kiwanjani_A_7);
+        map.addLayer(layer_Kiwanjani_A_7);
+        function pop_Kambi_Garba_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LEASE_NO_1'] !== null ? autolinker.link(feature.properties['LEASE_NO_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(feature.properties['Shape_Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Kambi_Garba_8_0() {
+            return {
+                pane: 'pane_Kambi_Garba_8',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Kambi_Garba_8');
+        map.getPane('pane_Kambi_Garba_8').style.zIndex = 408;
+        map.getPane('pane_Kambi_Garba_8').style['mix-blend-mode'] = 'normal';
+        var layer_Kambi_Garba_8 = new L.geoJson(json_Kambi_Garba_8, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Kambi_Garba_8',
+            layerName: 'layer_Kambi_Garba_8',
+            pane: 'pane_Kambi_Garba_8',
+            onEachFeature: pop_Kambi_Garba_8,
+            style: style_Kambi_Garba_8_0,
+        });
+        bounds_group.addLayer(layer_Kambi_Garba_8);
+        map.addLayer(layer_Kambi_Garba_8);
+        function pop_Kambi_Bulle_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lease_No_1'] !== null ? autolinker.link(feature.properties['Lease_No_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Reg_Sectio'] !== null ? autolinker.link(feature.properties['Reg_Sectio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(feature.properties['Shape_Length'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(feature.properties['Shape_Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_Kambi_Bulle_9_0() {
+            return {
+                pane: 'pane_Kambi_Bulle_9',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Kambi_Bulle_9');
+        map.getPane('pane_Kambi_Bulle_9').style.zIndex = 409;
+        map.getPane('pane_Kambi_Bulle_9').style['mix-blend-mode'] = 'normal';
+        var layer_Kambi_Bulle_9 = new L.geoJson(json_Kambi_Bulle_9, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Kambi_Bulle_9',
+            layerName: 'layer_Kambi_Bulle_9',
+            pane: 'pane_Kambi_Bulle_9',
+            onEachFeature: pop_Kambi_Bulle_9,
+            style: style_Kambi_Bulle_9_0,
+        });
+        bounds_group.addLayer(layer_Kambi_Bulle_9);
+        map.addLayer(layer_Kambi_Bulle_9);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -568,14 +660,15 @@
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var overlaysTree = [
-            {label: '<img src="legend/Tulloroba_8.png" /> Tulloroba', layer: layer_Tulloroba_8},
-            {label: '<img src="legend/Oldonyiro_7.png" /> Oldonyiro', layer: layer_Oldonyiro_7},
-            {label: '<img src="legend/Ngaremara_6.png" /> Ngaremara', layer: layer_Ngaremara_6},
+            {label: '<img src="legend/Kambi_Bulle_9.png" /> Kambi_Bulle', layer: layer_Kambi_Bulle_9},
+            {label: '<img src="legend/Kambi_Garba_8.png" /> Kambi_Garba', layer: layer_Kambi_Garba_8},
+            {label: '<img src="legend/Kiwanjani_A_7.png" /> Kiwanjani_A', layer: layer_Kiwanjani_A_7},
+            {label: '<img src="legend/Kiwanjani_B_6.png" /> Kiwanjani_B', layer: layer_Kiwanjani_B_6},
             {label: '<img src="legend/Kulamawe_5.png" /> Kulamawe', layer: layer_Kulamawe_5},
-            {label: '<img src="legend/Kiwanjani_B_4.png" /> Kiwanjani_B', layer: layer_Kiwanjani_B_4},
-            {label: '<img src="legend/Kiwanjani_A_3.png" /> Kiwanjani_A', layer: layer_Kiwanjani_A_3},
-            {label: '<img src="legend/Kambi_Garba_2.png" /> Kambi_Garba', layer: layer_Kambi_Garba_2},
-            {label: '<img src="legend/Kambi_Bulle_1.png" /> Kambi_Bulle', layer: layer_Kambi_Bulle_1},
+            {label: '<img src="legend/Ngaremara_4.png" /> Ngaremara', layer: layer_Ngaremara_4},
+            {label: '<img src="legend/Oldonyiro_3.png" /> Oldonyiro', layer: layer_Oldonyiro_3},
+            {label: '<img src="legend/Tulloroba_2.png" /> Tulloroba', layer: layer_Tulloroba_2},
+            {label: '<img src="legend/ward_1.png" /> ward', layer: layer_ward_1},
             {label: '<img src="legend/county_boundary_0.png" /> county_boundary', layer: layer_county_boundary_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
@@ -638,1328 +731,6 @@
             }  
         });       
         setBounds();
-        var mapDiv = document.getElementById('map');
-        var row = document.createElement('div');
-        row.className="row";
-        row.id="all";
-        row.style.height = "100%";
-        var col1 = document.createElement('div');
-        col1.className="col9";
-        col1.id = "mapWindow";
-        col1.style.height = "99%";
-        col1.style.width = "80%";
-        col1.style.display = "inline-block";
-        var col2 = document.createElement('div');
-        col2.className="col3";
-        col2.id = "menu";
-        col2.style.display = "inline-block";
-        mapDiv.parentNode.insertBefore(row, mapDiv);
-        document.getElementById("all").appendChild(col1);
-        document.getElementById("all").appendChild(col2);
-        col1.appendChild(mapDiv)
-        var Filters = {"CountyCode": "int","Area": "int","Shape_Area": "real","Lease_No_1": "str","Reg_sectio": "str","Reg_Sectio": "str","Name": "str","parcel_num": "str"};
-        function filterFunc() {
-          map.eachLayer(function(lyr){
-          if ("options" in lyr && "dataVar" in lyr["options"]){
-            features = this[lyr["options"]["dataVar"]].features.slice(0);
-            try{
-              for (key in Filters){
-                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
-                if (Filters[key] == "str" || Filters[key] == "bool"){
-                  var selection = [];
-                  var options = document.getElementById("sel_" + keyS).options
-                  for (var i=0; i < options.length; i++) {
-                    if (options[i].selected) selection.push(options[i].value);
-                  }
-                    try{
-                      if (key in features[0].properties){
-                        for (i = features.length - 1;
-                          i >= 0; --i){
-                          if (selection.indexOf(
-                          features[i].properties[key])<0
-                          && selection.length>0) {
-                          features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                  }
-                }
-                if (Filters[key] == "int"){
-                  sliderVals =  document.getElementById(
-                    "div_" + keyS).noUiSlider.get();
-                  try{
-                    if (key in features[0].properties){
-                    for (i = features.length - 1; i >= 0; --i){
-                      if (parseInt(features[i].properties[key])
-                          < sliderVals[0]
-                          || parseInt(features[i].properties[key])
-                          > sliderVals[1]){
-                            features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                    }
-                  }
-                if (Filters[key] == "real"){
-                  sliderVals =  document.getElementById(
-                    "div_" + keyS).noUiSlider.get();
-                  try{
-                    if (key in features[0].properties){
-                    for (i = features.length - 1; i >= 0; --i){
-                      if (features[i].properties[key]
-                          < sliderVals[0]
-                          || features[i].properties[key]
-                          > sliderVals[1]){
-                            features.splice(i,1);
-                          }
-                        }
-                      }
-                    } catch(err){
-                    }
-                  }
-                if (Filters[key] == "date"
-                  || Filters[key] == "datetime"
-                  || Filters[key] == "time"){
-                  try{
-                    if (key in features[0].properties){
-                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
-                      startdate = document.getElementById("dat_" +
-                        HTMLkey + "_date1").value.replace(" ", "T");
-                      enddate = document.getElementById("dat_" +
-                        HTMLkey + "_date2").value.replace(" ", "T");
-                      for (i = features.length - 1; i >= 0; --i){
-                        if (features[i].properties[key] < startdate
-                          || features[i].properties[key] > enddate){
-                          features.splice(i,1);
-                        }
-                      }
-                    }
-                  } catch(err){
-                  }
-                }
-              }
-            } catch(err){
-            }
-          this[lyr["options"]["layerName"]].clearLayers();
-          this[lyr["options"]["layerName"]].addData(features);
-          }
-          })
-        }
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_CountyCode = document.createElement("div");
-            div_CountyCode.id = "div_CountyCode";
-            div_CountyCode.className = "slider";
-            document.getElementById("menu").appendChild(div_CountyCode);
-            var lab_CountyCode = document.createElement('div');
-            lab_CountyCode.innerHTML  = 'CountyCode: <span id="val_CountyCode"></span>';
-            lab_CountyCode.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_CountyCode);
-            var reset_CountyCode = document.createElement('div');
-            reset_CountyCode.innerHTML = 'clear filter';
-            reset_CountyCode.className = 'filterlabel';
-            lab_CountyCode.className = 'filterlabel';
-            reset_CountyCode.onclick = function() {
-                sel_CountyCode.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_CountyCode);
-            var sel_CountyCode = document.getElementById('div_CountyCode');
-            noUiSlider.create(sel_CountyCode, {
-                connect: true,
-                start: [11, 12],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: 11,
-                max: 12
-                }
-            });
-            sel_CountyCode.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_CountyCode = document.getElementById('val_CountyCode');
-            val_CountyCode.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Area = document.createElement("div");
-            div_Area.id = "div_Area";
-            div_Area.className = "slider";
-            document.getElementById("menu").appendChild(div_Area);
-            var lab_Area = document.createElement('div');
-            lab_Area.innerHTML  = 'Area: <span id="val_Area"></span>';
-            lab_Area.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_Area);
-            var reset_Area = document.createElement('div');
-            reset_Area.innerHTML = 'clear filter';
-            reset_Area.className = 'filterlabel';
-            lab_Area.className = 'filterlabel';
-            reset_Area.onclick = function() {
-                sel_Area.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_Area);
-            var sel_Area = document.getElementById('div_Area');
-            noUiSlider.create(sel_Area, {
-                connect: true,
-                start: [218, 219],
-                step: 1,
-                format: wNumb({
-                    decimals: 0,
-                    }),
-                range: {
-                min: 218,
-                max: 219
-                }
-            });
-            sel_Area.noUiSlider.on('update', function (values) {
-            filterVals =[];
-            for (value in values){
-            filterVals.push(parseInt(value))
-            }
-            val_Area = document.getElementById('val_Area');
-            val_Area.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Shape_Area = document.createElement("div");
-            div_Shape_Area.id = "div_Shape_Area";
-            div_Shape_Area.className = "slider";
-            document.getElementById("menu").appendChild(div_Shape_Area);
-            var lab_Shape_Area = document.createElement('div');
-            lab_Shape_Area.innerHTML  = 'Shape_Area: <span id="val_Shape_Area"></span>';
-            lab_Shape_Area.className = 'filterlabel';
-            document.getElementById("menu").appendChild(lab_Shape_Area);
-            var reset_Shape_Area = document.createElement('div');
-            reset_Shape_Area.innerHTML = 'clear filter';
-            reset_Shape_Area.className = 'filterlabel';
-            lab_Shape_Area.className = 'filterlabel';
-            reset_Shape_Area.onclick = function() {
-                sel_Shape_Area.noUiSlider.reset();
-            };
-            document.getElementById("menu").appendChild(reset_Shape_Area);
-            var sel_Shape_Area = document.getElementById('div_Shape_Area');
-            noUiSlider.create(sel_Shape_Area, {
-                connect: true,
-                start: [36.6447089449, 2582693.52102],
-                range: {
-                min: 36.6447089449,
-                max: 2582693.52102
-                }
-            });
-            sel_Shape_Area.noUiSlider.on('update', function (values) {
-            val_Shape_Area = document.getElementById('val_Shape_Area');
-            val_Shape_Area.innerHTML = values.join(' - ');
-                filterFunc()
-            });
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Lease_No_1 = document.createElement('div');
-            div_Lease_No_1.id = "div_Lease_No_1";
-            div_Lease_No_1.className= "filterselect";
-            document.getElementById("menu").appendChild(div_Lease_No_1);
-            sel_Lease_No_1 = document.createElement('select');
-            sel_Lease_No_1.multiple = true;
-            sel_Lease_No_1.size = 10;
-            sel_Lease_No_1.id = "sel_Lease_No_1";
-            var Lease_No_1_options_str = "<option value='' unselected></option>";
-            sel_Lease_No_1.onchange = function(){filterFunc()};
-            Lease_No_1_options_str  += '<option value="NULL">NULL</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/10">ISIOLO TOWNSHIP BLCK 10/10</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/100">ISIOLO TOWNSHIP BLCK 10/100</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/101">ISIOLO TOWNSHIP BLCK 10/101</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/102">ISIOLO TOWNSHIP BLCK 10/102</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/103">ISIOLO TOWNSHIP BLCK 10/103</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/104">ISIOLO TOWNSHIP BLCK 10/104</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/105-106">ISIOLO TOWNSHIP BLCK 10/105-106</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/107">ISIOLO TOWNSHIP BLCK 10/107</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/108">ISIOLO TOWNSHIP BLCK 10/108</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/109">ISIOLO TOWNSHIP BLCK 10/109</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/11">ISIOLO TOWNSHIP BLCK 10/11</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/110">ISIOLO TOWNSHIP BLCK 10/110</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/111">ISIOLO TOWNSHIP BLCK 10/111</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/112">ISIOLO TOWNSHIP BLCK 10/112</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/113">ISIOLO TOWNSHIP BLCK 10/113</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/114">ISIOLO TOWNSHIP BLCK 10/114</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/115">ISIOLO TOWNSHIP BLCK 10/115</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/116">ISIOLO TOWNSHIP BLCK 10/116</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/117">ISIOLO TOWNSHIP BLCK 10/117</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/118">ISIOLO TOWNSHIP BLCK 10/118</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/119">ISIOLO TOWNSHIP BLCK 10/119</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/12">ISIOLO TOWNSHIP BLCK 10/12</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/120">ISIOLO TOWNSHIP BLCK 10/120</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/121">ISIOLO TOWNSHIP BLCK 10/121</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/122">ISIOLO TOWNSHIP BLCK 10/122</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/123">ISIOLO TOWNSHIP BLCK 10/123</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/124">ISIOLO TOWNSHIP BLCK 10/124</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/125">ISIOLO TOWNSHIP BLCK 10/125</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/126">ISIOLO TOWNSHIP BLCK 10/126</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/127">ISIOLO TOWNSHIP BLCK 10/127</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/128">ISIOLO TOWNSHIP BLCK 10/128</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/129">ISIOLO TOWNSHIP BLCK 10/129</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/13">ISIOLO TOWNSHIP BLCK 10/13</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/131">ISIOLO TOWNSHIP BLCK 10/131</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/132">ISIOLO TOWNSHIP BLCK 10/132</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/133">ISIOLO TOWNSHIP BLCK 10/133</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/134">ISIOLO TOWNSHIP BLCK 10/134</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/135">ISIOLO TOWNSHIP BLCK 10/135</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/136">ISIOLO TOWNSHIP BLCK 10/136</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/137">ISIOLO TOWNSHIP BLCK 10/137</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/138">ISIOLO TOWNSHIP BLCK 10/138</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/139">ISIOLO TOWNSHIP BLCK 10/139</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/14">ISIOLO TOWNSHIP BLCK 10/14</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/140">ISIOLO TOWNSHIP BLCK 10/140</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/141">ISIOLO TOWNSHIP BLCK 10/141</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/142">ISIOLO TOWNSHIP BLCK 10/142</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/143">ISIOLO TOWNSHIP BLCK 10/143</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/144">ISIOLO TOWNSHIP BLCK 10/144</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/145">ISIOLO TOWNSHIP BLCK 10/145</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/146">ISIOLO TOWNSHIP BLCK 10/146</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/147">ISIOLO TOWNSHIP BLCK 10/147</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/148">ISIOLO TOWNSHIP BLCK 10/148</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/149">ISIOLO TOWNSHIP BLCK 10/149</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/15">ISIOLO TOWNSHIP BLCK 10/15</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/150">ISIOLO TOWNSHIP BLCK 10/150</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/151">ISIOLO TOWNSHIP BLCK 10/151</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/152">ISIOLO TOWNSHIP BLCK 10/152</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/153">ISIOLO TOWNSHIP BLCK 10/153</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/154">ISIOLO TOWNSHIP BLCK 10/154</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/155">ISIOLO TOWNSHIP BLCK 10/155</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/156">ISIOLO TOWNSHIP BLCK 10/156</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/157">ISIOLO TOWNSHIP BLCK 10/157</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/158">ISIOLO TOWNSHIP BLCK 10/158</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/159">ISIOLO TOWNSHIP BLCK 10/159</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/16">ISIOLO TOWNSHIP BLCK 10/16</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/160">ISIOLO TOWNSHIP BLCK 10/160</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/161">ISIOLO TOWNSHIP BLCK 10/161</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/162">ISIOLO TOWNSHIP BLCK 10/162</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/163">ISIOLO TOWNSHIP BLCK 10/163</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/164">ISIOLO TOWNSHIP BLCK 10/164</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/165">ISIOLO TOWNSHIP BLCK 10/165</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/166">ISIOLO TOWNSHIP BLCK 10/166</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/167">ISIOLO TOWNSHIP BLCK 10/167</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/168">ISIOLO TOWNSHIP BLCK 10/168</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/169">ISIOLO TOWNSHIP BLCK 10/169</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/17">ISIOLO TOWNSHIP BLCK 10/17</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/170">ISIOLO TOWNSHIP BLCK 10/170</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/171">ISIOLO TOWNSHIP BLCK 10/171</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/172">ISIOLO TOWNSHIP BLCK 10/172</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/173">ISIOLO TOWNSHIP BLCK 10/173</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/174">ISIOLO TOWNSHIP BLCK 10/174</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/175">ISIOLO TOWNSHIP BLCK 10/175</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/176">ISIOLO TOWNSHIP BLCK 10/176</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/177">ISIOLO TOWNSHIP BLCK 10/177</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/178">ISIOLO TOWNSHIP BLCK 10/178</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/179">ISIOLO TOWNSHIP BLCK 10/179</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/18">ISIOLO TOWNSHIP BLCK 10/18</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/180">ISIOLO TOWNSHIP BLCK 10/180</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/181">ISIOLO TOWNSHIP BLCK 10/181</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/182">ISIOLO TOWNSHIP BLCK 10/182</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/183">ISIOLO TOWNSHIP BLCK 10/183</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/184">ISIOLO TOWNSHIP BLCK 10/184</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/185">ISIOLO TOWNSHIP BLCK 10/185</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/186">ISIOLO TOWNSHIP BLCK 10/186</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/187">ISIOLO TOWNSHIP BLCK 10/187</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/188">ISIOLO TOWNSHIP BLCK 10/188</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/189">ISIOLO TOWNSHIP BLCK 10/189</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/19">ISIOLO TOWNSHIP BLCK 10/19</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/190">ISIOLO TOWNSHIP BLCK 10/190</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/191">ISIOLO TOWNSHIP BLCK 10/191</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/192">ISIOLO TOWNSHIP BLCK 10/192</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/193">ISIOLO TOWNSHIP BLCK 10/193</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/194">ISIOLO TOWNSHIP BLCK 10/194</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/195">ISIOLO TOWNSHIP BLCK 10/195</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/196">ISIOLO TOWNSHIP BLCK 10/196</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/197">ISIOLO TOWNSHIP BLCK 10/197</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/198">ISIOLO TOWNSHIP BLCK 10/198</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/199">ISIOLO TOWNSHIP BLCK 10/199</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/2">ISIOLO TOWNSHIP BLCK 10/2</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/20">ISIOLO TOWNSHIP BLCK 10/20</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/200">ISIOLO TOWNSHIP BLCK 10/200</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/201">ISIOLO TOWNSHIP BLCK 10/201</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/202">ISIOLO TOWNSHIP BLCK 10/202</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/203">ISIOLO TOWNSHIP BLCK 10/203</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/204">ISIOLO TOWNSHIP BLCK 10/204</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/205">ISIOLO TOWNSHIP BLCK 10/205</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/206">ISIOLO TOWNSHIP BLCK 10/206</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/207">ISIOLO TOWNSHIP BLCK 10/207</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/208">ISIOLO TOWNSHIP BLCK 10/208</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/209">ISIOLO TOWNSHIP BLCK 10/209</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/21">ISIOLO TOWNSHIP BLCK 10/21</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/210">ISIOLO TOWNSHIP BLCK 10/210</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/211">ISIOLO TOWNSHIP BLCK 10/211</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/212">ISIOLO TOWNSHIP BLCK 10/212</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/213">ISIOLO TOWNSHIP BLCK 10/213</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/214">ISIOLO TOWNSHIP BLCK 10/214</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/215">ISIOLO TOWNSHIP BLCK 10/215</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/216">ISIOLO TOWNSHIP BLCK 10/216</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/217">ISIOLO TOWNSHIP BLCK 10/217</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/218">ISIOLO TOWNSHIP BLCK 10/218</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/219">ISIOLO TOWNSHIP BLCK 10/219</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/22">ISIOLO TOWNSHIP BLCK 10/22</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/220">ISIOLO TOWNSHIP BLCK 10/220</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/221">ISIOLO TOWNSHIP BLCK 10/221</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/222-223">ISIOLO TOWNSHIP BLCK 10/222-223</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/223">ISIOLO TOWNSHIP BLCK 10/223</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/224">ISIOLO TOWNSHIP BLCK 10/224</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/225">ISIOLO TOWNSHIP BLCK 10/225</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/226">ISIOLO TOWNSHIP BLCK 10/226</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/227">ISIOLO TOWNSHIP BLCK 10/227</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/228">ISIOLO TOWNSHIP BLCK 10/228</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/229">ISIOLO TOWNSHIP BLCK 10/229</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/23">ISIOLO TOWNSHIP BLCK 10/23</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/230">ISIOLO TOWNSHIP BLCK 10/230</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/231">ISIOLO TOWNSHIP BLCK 10/231</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/232">ISIOLO TOWNSHIP BLCK 10/232</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/233">ISIOLO TOWNSHIP BLCK 10/233</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/234">ISIOLO TOWNSHIP BLCK 10/234</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/235">ISIOLO TOWNSHIP BLCK 10/235</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/236">ISIOLO TOWNSHIP BLCK 10/236</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/237">ISIOLO TOWNSHIP BLCK 10/237</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/238">ISIOLO TOWNSHIP BLCK 10/238</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/239">ISIOLO TOWNSHIP BLCK 10/239</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/24">ISIOLO TOWNSHIP BLCK 10/24</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/240">ISIOLO TOWNSHIP BLCK 10/240</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/241">ISIOLO TOWNSHIP BLCK 10/241</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/242">ISIOLO TOWNSHIP BLCK 10/242</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/243">ISIOLO TOWNSHIP BLCK 10/243</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/244">ISIOLO TOWNSHIP BLCK 10/244</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/245-246">ISIOLO TOWNSHIP BLCK 10/245-246</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/247">ISIOLO TOWNSHIP BLCK 10/247</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/248">ISIOLO TOWNSHIP BLCK 10/248</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/249">ISIOLO TOWNSHIP BLCK 10/249</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/25">ISIOLO TOWNSHIP BLCK 10/25</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/250">ISIOLO TOWNSHIP BLCK 10/250</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/251">ISIOLO TOWNSHIP BLCK 10/251</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/252">ISIOLO TOWNSHIP BLCK 10/252</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/253">ISIOLO TOWNSHIP BLCK 10/253</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/254">ISIOLO TOWNSHIP BLCK 10/254</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/255">ISIOLO TOWNSHIP BLCK 10/255</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/256">ISIOLO TOWNSHIP BLCK 10/256</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/257">ISIOLO TOWNSHIP BLCK 10/257</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/259">ISIOLO TOWNSHIP BLCK 10/259</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/26">ISIOLO TOWNSHIP BLCK 10/26</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/260">ISIOLO TOWNSHIP BLCK 10/260</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/261">ISIOLO TOWNSHIP BLCK 10/261</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/262">ISIOLO TOWNSHIP BLCK 10/262</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/263">ISIOLO TOWNSHIP BLCK 10/263</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/264">ISIOLO TOWNSHIP BLCK 10/264</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/265">ISIOLO TOWNSHIP BLCK 10/265</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/266">ISIOLO TOWNSHIP BLCK 10/266</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/267">ISIOLO TOWNSHIP BLCK 10/267</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/268">ISIOLO TOWNSHIP BLCK 10/268</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/269">ISIOLO TOWNSHIP BLCK 10/269</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/27">ISIOLO TOWNSHIP BLCK 10/27</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/270">ISIOLO TOWNSHIP BLCK 10/270</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/271">ISIOLO TOWNSHIP BLCK 10/271</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/272">ISIOLO TOWNSHIP BLCK 10/272</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/273">ISIOLO TOWNSHIP BLCK 10/273</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/274">ISIOLO TOWNSHIP BLCK 10/274</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/275">ISIOLO TOWNSHIP BLCK 10/275</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/276">ISIOLO TOWNSHIP BLCK 10/276</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/277">ISIOLO TOWNSHIP BLCK 10/277</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/278">ISIOLO TOWNSHIP BLCK 10/278</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/279">ISIOLO TOWNSHIP BLCK 10/279</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/28">ISIOLO TOWNSHIP BLCK 10/28</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/280">ISIOLO TOWNSHIP BLCK 10/280</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/281-286">ISIOLO TOWNSHIP BLCK 10/281-286</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/282">ISIOLO TOWNSHIP BLCK 10/282</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/283">ISIOLO TOWNSHIP BLCK 10/283</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/284-285">ISIOLO TOWNSHIP BLCK 10/284-285</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/288-287">ISIOLO TOWNSHIP BLCK 10/288-287</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/29">ISIOLO TOWNSHIP BLCK 10/29</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/290">ISIOLO TOWNSHIP BLCK 10/290</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/291">ISIOLO TOWNSHIP BLCK 10/291</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/292-289">ISIOLO TOWNSHIP BLCK 10/292-289</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/293">ISIOLO TOWNSHIP BLCK 10/293</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/294-295">ISIOLO TOWNSHIP BLCK 10/294-295</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/296">ISIOLO TOWNSHIP BLCK 10/296</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/297">ISIOLO TOWNSHIP BLCK 10/297</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/298">ISIOLO TOWNSHIP BLCK 10/298</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/299">ISIOLO TOWNSHIP BLCK 10/299</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/3">ISIOLO TOWNSHIP BLCK 10/3</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/30">ISIOLO TOWNSHIP BLCK 10/30</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/300">ISIOLO TOWNSHIP BLCK 10/300</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/301">ISIOLO TOWNSHIP BLCK 10/301</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/302">ISIOLO TOWNSHIP BLCK 10/302</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/303">ISIOLO TOWNSHIP BLCK 10/303</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/304">ISIOLO TOWNSHIP BLCK 10/304</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/305">ISIOLO TOWNSHIP BLCK 10/305</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/306">ISIOLO TOWNSHIP BLCK 10/306</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/307">ISIOLO TOWNSHIP BLCK 10/307</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/308">ISIOLO TOWNSHIP BLCK 10/308</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/309-310">ISIOLO TOWNSHIP BLCK 10/309-310</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/31">ISIOLO TOWNSHIP BLCK 10/31</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/311">ISIOLO TOWNSHIP BLCK 10/311</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/312">ISIOLO TOWNSHIP BLCK 10/312</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/313">ISIOLO TOWNSHIP BLCK 10/313</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/314">ISIOLO TOWNSHIP BLCK 10/314</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/315-316">ISIOLO TOWNSHIP BLCK 10/315-316</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/316">ISIOLO TOWNSHIP BLCK 10/316</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/317">ISIOLO TOWNSHIP BLCK 10/317</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/318">ISIOLO TOWNSHIP BLCK 10/318</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/319">ISIOLO TOWNSHIP BLCK 10/319</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/32">ISIOLO TOWNSHIP BLCK 10/32</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/320">ISIOLO TOWNSHIP BLCK 10/320</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/321">ISIOLO TOWNSHIP BLCK 10/321</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/322">ISIOLO TOWNSHIP BLCK 10/322</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/323">ISIOLO TOWNSHIP BLCK 10/323</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/324">ISIOLO TOWNSHIP BLCK 10/324</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/325">ISIOLO TOWNSHIP BLCK 10/325</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/326">ISIOLO TOWNSHIP BLCK 10/326</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/327">ISIOLO TOWNSHIP BLCK 10/327</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/328">ISIOLO TOWNSHIP BLCK 10/328</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/329">ISIOLO TOWNSHIP BLCK 10/329</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/33">ISIOLO TOWNSHIP BLCK 10/33</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/330">ISIOLO TOWNSHIP BLCK 10/330</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/331">ISIOLO TOWNSHIP BLCK 10/331</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/332">ISIOLO TOWNSHIP BLCK 10/332</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/333">ISIOLO TOWNSHIP BLCK 10/333</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/334">ISIOLO TOWNSHIP BLCK 10/334</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/335">ISIOLO TOWNSHIP BLCK 10/335</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/336">ISIOLO TOWNSHIP BLCK 10/336</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/337">ISIOLO TOWNSHIP BLCK 10/337</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/338">ISIOLO TOWNSHIP BLCK 10/338</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/339">ISIOLO TOWNSHIP BLCK 10/339</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/34">ISIOLO TOWNSHIP BLCK 10/34</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/340">ISIOLO TOWNSHIP BLCK 10/340</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/341">ISIOLO TOWNSHIP BLCK 10/341</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/342">ISIOLO TOWNSHIP BLCK 10/342</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/343">ISIOLO TOWNSHIP BLCK 10/343</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/344">ISIOLO TOWNSHIP BLCK 10/344</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/345">ISIOLO TOWNSHIP BLCK 10/345</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/346">ISIOLO TOWNSHIP BLCK 10/346</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/347">ISIOLO TOWNSHIP BLCK 10/347</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/348">ISIOLO TOWNSHIP BLCK 10/348</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/349">ISIOLO TOWNSHIP BLCK 10/349</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/35">ISIOLO TOWNSHIP BLCK 10/35</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/350">ISIOLO TOWNSHIP BLCK 10/350</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/351">ISIOLO TOWNSHIP BLCK 10/351</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/353">ISIOLO TOWNSHIP BLCK 10/353</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/354">ISIOLO TOWNSHIP BLCK 10/354</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/355">ISIOLO TOWNSHIP BLCK 10/355</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/356">ISIOLO TOWNSHIP BLCK 10/356</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/357">ISIOLO TOWNSHIP BLCK 10/357</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/358">ISIOLO TOWNSHIP BLCK 10/358</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/359">ISIOLO TOWNSHIP BLCK 10/359</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/36">ISIOLO TOWNSHIP BLCK 10/36</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/360">ISIOLO TOWNSHIP BLCK 10/360</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/361">ISIOLO TOWNSHIP BLCK 10/361</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/363">ISIOLO TOWNSHIP BLCK 10/363</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/364">ISIOLO TOWNSHIP BLCK 10/364</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/365">ISIOLO TOWNSHIP BLCK 10/365</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/366">ISIOLO TOWNSHIP BLCK 10/366</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/367-368">ISIOLO TOWNSHIP BLCK 10/367-368</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/369">ISIOLO TOWNSHIP BLCK 10/369</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/37">ISIOLO TOWNSHIP BLCK 10/37</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/370">ISIOLO TOWNSHIP BLCK 10/370</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/371">ISIOLO TOWNSHIP BLCK 10/371</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/372">ISIOLO TOWNSHIP BLCK 10/372</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/373">ISIOLO TOWNSHIP BLCK 10/373</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/374">ISIOLO TOWNSHIP BLCK 10/374</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/375">ISIOLO TOWNSHIP BLCK 10/375</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/376">ISIOLO TOWNSHIP BLCK 10/376</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/377">ISIOLO TOWNSHIP BLCK 10/377</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/378">ISIOLO TOWNSHIP BLCK 10/378</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/379">ISIOLO TOWNSHIP BLCK 10/379</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/38">ISIOLO TOWNSHIP BLCK 10/38</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/380">ISIOLO TOWNSHIP BLCK 10/380</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/381">ISIOLO TOWNSHIP BLCK 10/381</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/382">ISIOLO TOWNSHIP BLCK 10/382</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/383">ISIOLO TOWNSHIP BLCK 10/383</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/384">ISIOLO TOWNSHIP BLCK 10/384</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/385">ISIOLO TOWNSHIP BLCK 10/385</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/386">ISIOLO TOWNSHIP BLCK 10/386</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/387">ISIOLO TOWNSHIP BLCK 10/387</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/388">ISIOLO TOWNSHIP BLCK 10/388</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/389">ISIOLO TOWNSHIP BLCK 10/389</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/39">ISIOLO TOWNSHIP BLCK 10/39</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/390">ISIOLO TOWNSHIP BLCK 10/390</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/391">ISIOLO TOWNSHIP BLCK 10/391</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/392">ISIOLO TOWNSHIP BLCK 10/392</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/393">ISIOLO TOWNSHIP BLCK 10/393</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/394">ISIOLO TOWNSHIP BLCK 10/394</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/395">ISIOLO TOWNSHIP BLCK 10/395</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/396">ISIOLO TOWNSHIP BLCK 10/396</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/397">ISIOLO TOWNSHIP BLCK 10/397</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/398">ISIOLO TOWNSHIP BLCK 10/398</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/399">ISIOLO TOWNSHIP BLCK 10/399</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/4">ISIOLO TOWNSHIP BLCK 10/4</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/40">ISIOLO TOWNSHIP BLCK 10/40</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/400">ISIOLO TOWNSHIP BLCK 10/400</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/401">ISIOLO TOWNSHIP BLCK 10/401</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/402">ISIOLO TOWNSHIP BLCK 10/402</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/403">ISIOLO TOWNSHIP BLCK 10/403</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/404-405">ISIOLO TOWNSHIP BLCK 10/404-405</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/406">ISIOLO TOWNSHIP BLCK 10/406</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/407">ISIOLO TOWNSHIP BLCK 10/407</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/408">ISIOLO TOWNSHIP BLCK 10/408</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/409">ISIOLO TOWNSHIP BLCK 10/409</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/41">ISIOLO TOWNSHIP BLCK 10/41</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/410">ISIOLO TOWNSHIP BLCK 10/410</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/411">ISIOLO TOWNSHIP BLCK 10/411</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/412">ISIOLO TOWNSHIP BLCK 10/412</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/413">ISIOLO TOWNSHIP BLCK 10/413</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/414">ISIOLO TOWNSHIP BLCK 10/414</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/415">ISIOLO TOWNSHIP BLCK 10/415</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/416">ISIOLO TOWNSHIP BLCK 10/416</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/417">ISIOLO TOWNSHIP BLCK 10/417</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/418">ISIOLO TOWNSHIP BLCK 10/418</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/419">ISIOLO TOWNSHIP BLCK 10/419</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/42">ISIOLO TOWNSHIP BLCK 10/42</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/420">ISIOLO TOWNSHIP BLCK 10/420</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/421">ISIOLO TOWNSHIP BLCK 10/421</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/422">ISIOLO TOWNSHIP BLCK 10/422</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/423">ISIOLO TOWNSHIP BLCK 10/423</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/424">ISIOLO TOWNSHIP BLCK 10/424</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/425">ISIOLO TOWNSHIP BLCK 10/425</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/426">ISIOLO TOWNSHIP BLCK 10/426</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/427">ISIOLO TOWNSHIP BLCK 10/427</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/428">ISIOLO TOWNSHIP BLCK 10/428</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/429">ISIOLO TOWNSHIP BLCK 10/429</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/43">ISIOLO TOWNSHIP BLCK 10/43</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/430">ISIOLO TOWNSHIP BLCK 10/430</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/431">ISIOLO TOWNSHIP BLCK 10/431</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/432">ISIOLO TOWNSHIP BLCK 10/432</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/433">ISIOLO TOWNSHIP BLCK 10/433</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/434">ISIOLO TOWNSHIP BLCK 10/434</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/434_362">ISIOLO TOWNSHIP BLCK 10/434_362</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/435">ISIOLO TOWNSHIP BLCK 10/435</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/44">ISIOLO TOWNSHIP BLCK 10/44</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/45">ISIOLO TOWNSHIP BLCK 10/45</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/46">ISIOLO TOWNSHIP BLCK 10/46</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/47">ISIOLO TOWNSHIP BLCK 10/47</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/48">ISIOLO TOWNSHIP BLCK 10/48</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/49">ISIOLO TOWNSHIP BLCK 10/49</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/5">ISIOLO TOWNSHIP BLCK 10/5</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/50">ISIOLO TOWNSHIP BLCK 10/50</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/51">ISIOLO TOWNSHIP BLCK 10/51</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/52">ISIOLO TOWNSHIP BLCK 10/52</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/53">ISIOLO TOWNSHIP BLCK 10/53</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/54">ISIOLO TOWNSHIP BLCK 10/54</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/55">ISIOLO TOWNSHIP BLCK 10/55</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/56">ISIOLO TOWNSHIP BLCK 10/56</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/57">ISIOLO TOWNSHIP BLCK 10/57</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/58">ISIOLO TOWNSHIP BLCK 10/58</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/59">ISIOLO TOWNSHIP BLCK 10/59</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/6">ISIOLO TOWNSHIP BLCK 10/6</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/60">ISIOLO TOWNSHIP BLCK 10/60</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/61">ISIOLO TOWNSHIP BLCK 10/61</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/62">ISIOLO TOWNSHIP BLCK 10/62</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/63">ISIOLO TOWNSHIP BLCK 10/63</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/64">ISIOLO TOWNSHIP BLCK 10/64</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/65">ISIOLO TOWNSHIP BLCK 10/65</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/66">ISIOLO TOWNSHIP BLCK 10/66</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/67">ISIOLO TOWNSHIP BLCK 10/67</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/68">ISIOLO TOWNSHIP BLCK 10/68</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/69">ISIOLO TOWNSHIP BLCK 10/69</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/7">ISIOLO TOWNSHIP BLCK 10/7</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/70">ISIOLO TOWNSHIP BLCK 10/70</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/71">ISIOLO TOWNSHIP BLCK 10/71</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/72">ISIOLO TOWNSHIP BLCK 10/72</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/73">ISIOLO TOWNSHIP BLCK 10/73</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/74">ISIOLO TOWNSHIP BLCK 10/74</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/75">ISIOLO TOWNSHIP BLCK 10/75</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/76">ISIOLO TOWNSHIP BLCK 10/76</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/77">ISIOLO TOWNSHIP BLCK 10/77</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/78">ISIOLO TOWNSHIP BLCK 10/78</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/79">ISIOLO TOWNSHIP BLCK 10/79</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/8">ISIOLO TOWNSHIP BLCK 10/8</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/80">ISIOLO TOWNSHIP BLCK 10/80</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/81">ISIOLO TOWNSHIP BLCK 10/81</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/82">ISIOLO TOWNSHIP BLCK 10/82</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/83">ISIOLO TOWNSHIP BLCK 10/83</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/84">ISIOLO TOWNSHIP BLCK 10/84</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/85">ISIOLO TOWNSHIP BLCK 10/85</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/86">ISIOLO TOWNSHIP BLCK 10/86</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/87">ISIOLO TOWNSHIP BLCK 10/87</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/88">ISIOLO TOWNSHIP BLCK 10/88</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/89">ISIOLO TOWNSHIP BLCK 10/89</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/9">ISIOLO TOWNSHIP BLCK 10/9</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/90-91">ISIOLO TOWNSHIP BLCK 10/90-91</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/92">ISIOLO TOWNSHIP BLCK 10/92</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/93-94">ISIOLO TOWNSHIP BLCK 10/93-94</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/95">ISIOLO TOWNSHIP BLCK 10/95</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/96">ISIOLO TOWNSHIP BLCK 10/96</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/97">ISIOLO TOWNSHIP BLCK 10/97</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/98">ISIOLO TOWNSHIP BLCK 10/98</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLCK 10/99">ISIOLO TOWNSHIP BLCK 10/99</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 10/352">ISIOLO TOWNSHIP BLOCK 10/352</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/262">ISIOLO TOWNSHIP BLOCK 3/262</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/388">ISIOLO TOWNSHIP BLOCK 3/388</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/390">ISIOLO TOWNSHIP BLOCK 3/390</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/401">ISIOLO TOWNSHIP BLOCK 3/401</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/402">ISIOLO TOWNSHIP BLOCK 3/402</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/403">ISIOLO TOWNSHIP BLOCK 3/403</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/404">ISIOLO TOWNSHIP BLOCK 3/404</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/405">ISIOLO TOWNSHIP BLOCK 3/405</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/406">ISIOLO TOWNSHIP BLOCK 3/406</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/407">ISIOLO TOWNSHIP BLOCK 3/407</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/408">ISIOLO TOWNSHIP BLOCK 3/408</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/409">ISIOLO TOWNSHIP BLOCK 3/409</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/410">ISIOLO TOWNSHIP BLOCK 3/410</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/411">ISIOLO TOWNSHIP BLOCK 3/411</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/412">ISIOLO TOWNSHIP BLOCK 3/412</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/413">ISIOLO TOWNSHIP BLOCK 3/413</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/414">ISIOLO TOWNSHIP BLOCK 3/414</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/415">ISIOLO TOWNSHIP BLOCK 3/415</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/416">ISIOLO TOWNSHIP BLOCK 3/416</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/417">ISIOLO TOWNSHIP BLOCK 3/417</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/418">ISIOLO TOWNSHIP BLOCK 3/418</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/419">ISIOLO TOWNSHIP BLOCK 3/419</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/420">ISIOLO TOWNSHIP BLOCK 3/420</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/421">ISIOLO TOWNSHIP BLOCK 3/421</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/422">ISIOLO TOWNSHIP BLOCK 3/422</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/423">ISIOLO TOWNSHIP BLOCK 3/423</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/424">ISIOLO TOWNSHIP BLOCK 3/424</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/425">ISIOLO TOWNSHIP BLOCK 3/425</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/426">ISIOLO TOWNSHIP BLOCK 3/426</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/427">ISIOLO TOWNSHIP BLOCK 3/427</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/428">ISIOLO TOWNSHIP BLOCK 3/428</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/429">ISIOLO TOWNSHIP BLOCK 3/429</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/430">ISIOLO TOWNSHIP BLOCK 3/430</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/431">ISIOLO TOWNSHIP BLOCK 3/431</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/432">ISIOLO TOWNSHIP BLOCK 3/432</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/433">ISIOLO TOWNSHIP BLOCK 3/433</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/434">ISIOLO TOWNSHIP BLOCK 3/434</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/435">ISIOLO TOWNSHIP BLOCK 3/435</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/436">ISIOLO TOWNSHIP BLOCK 3/436</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/437">ISIOLO TOWNSHIP BLOCK 3/437</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/438">ISIOLO TOWNSHIP BLOCK 3/438</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/439">ISIOLO TOWNSHIP BLOCK 3/439</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/440">ISIOLO TOWNSHIP BLOCK 3/440</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/441">ISIOLO TOWNSHIP BLOCK 3/441</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/442">ISIOLO TOWNSHIP BLOCK 3/442</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/444">ISIOLO TOWNSHIP BLOCK 3/444</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/445">ISIOLO TOWNSHIP BLOCK 3/445</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/446">ISIOLO TOWNSHIP BLOCK 3/446</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/447">ISIOLO TOWNSHIP BLOCK 3/447</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/448">ISIOLO TOWNSHIP BLOCK 3/448</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/449">ISIOLO TOWNSHIP BLOCK 3/449</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/450">ISIOLO TOWNSHIP BLOCK 3/450</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/451">ISIOLO TOWNSHIP BLOCK 3/451</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/452">ISIOLO TOWNSHIP BLOCK 3/452</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/453">ISIOLO TOWNSHIP BLOCK 3/453</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/454">ISIOLO TOWNSHIP BLOCK 3/454</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/455">ISIOLO TOWNSHIP BLOCK 3/455</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/456">ISIOLO TOWNSHIP BLOCK 3/456</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/457">ISIOLO TOWNSHIP BLOCK 3/457</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/458">ISIOLO TOWNSHIP BLOCK 3/458</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/459">ISIOLO TOWNSHIP BLOCK 3/459</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/460">ISIOLO TOWNSHIP BLOCK 3/460</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/461">ISIOLO TOWNSHIP BLOCK 3/461</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/462">ISIOLO TOWNSHIP BLOCK 3/462</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/464">ISIOLO TOWNSHIP BLOCK 3/464</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/465">ISIOLO TOWNSHIP BLOCK 3/465</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/466">ISIOLO TOWNSHIP BLOCK 3/466</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/467">ISIOLO TOWNSHIP BLOCK 3/467</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/468">ISIOLO TOWNSHIP BLOCK 3/468</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/469">ISIOLO TOWNSHIP BLOCK 3/469</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/470">ISIOLO TOWNSHIP BLOCK 3/470</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/471">ISIOLO TOWNSHIP BLOCK 3/471</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/472">ISIOLO TOWNSHIP BLOCK 3/472</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/473">ISIOLO TOWNSHIP BLOCK 3/473</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/474">ISIOLO TOWNSHIP BLOCK 3/474</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/475">ISIOLO TOWNSHIP BLOCK 3/475</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/476">ISIOLO TOWNSHIP BLOCK 3/476</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/477">ISIOLO TOWNSHIP BLOCK 3/477</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/478">ISIOLO TOWNSHIP BLOCK 3/478</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/479">ISIOLO TOWNSHIP BLOCK 3/479</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/480">ISIOLO TOWNSHIP BLOCK 3/480</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/481">ISIOLO TOWNSHIP BLOCK 3/481</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/482">ISIOLO TOWNSHIP BLOCK 3/482</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/483">ISIOLO TOWNSHIP BLOCK 3/483</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/484">ISIOLO TOWNSHIP BLOCK 3/484</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/485">ISIOLO TOWNSHIP BLOCK 3/485</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/486">ISIOLO TOWNSHIP BLOCK 3/486</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/487">ISIOLO TOWNSHIP BLOCK 3/487</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/488">ISIOLO TOWNSHIP BLOCK 3/488</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/489">ISIOLO TOWNSHIP BLOCK 3/489</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/490">ISIOLO TOWNSHIP BLOCK 3/490</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/491">ISIOLO TOWNSHIP BLOCK 3/491</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/492">ISIOLO TOWNSHIP BLOCK 3/492</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/493">ISIOLO TOWNSHIP BLOCK 3/493</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/494">ISIOLO TOWNSHIP BLOCK 3/494</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/495">ISIOLO TOWNSHIP BLOCK 3/495</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/496">ISIOLO TOWNSHIP BLOCK 3/496</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/497">ISIOLO TOWNSHIP BLOCK 3/497</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/498">ISIOLO TOWNSHIP BLOCK 3/498</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/499">ISIOLO TOWNSHIP BLOCK 3/499</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/500">ISIOLO TOWNSHIP BLOCK 3/500</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/501">ISIOLO TOWNSHIP BLOCK 3/501</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/502">ISIOLO TOWNSHIP BLOCK 3/502</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/503">ISIOLO TOWNSHIP BLOCK 3/503</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/504">ISIOLO TOWNSHIP BLOCK 3/504</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/505">ISIOLO TOWNSHIP BLOCK 3/505</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/506">ISIOLO TOWNSHIP BLOCK 3/506</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/507">ISIOLO TOWNSHIP BLOCK 3/507</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/508">ISIOLO TOWNSHIP BLOCK 3/508</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/509">ISIOLO TOWNSHIP BLOCK 3/509</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/512-513">ISIOLO TOWNSHIP BLOCK 3/512-513</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/514">ISIOLO TOWNSHIP BLOCK 3/514</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/515">ISIOLO TOWNSHIP BLOCK 3/515</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/517">ISIOLO TOWNSHIP BLOCK 3/517</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/518">ISIOLO TOWNSHIP BLOCK 3/518</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/519">ISIOLO TOWNSHIP BLOCK 3/519</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/520">ISIOLO TOWNSHIP BLOCK 3/520</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/521">ISIOLO TOWNSHIP BLOCK 3/521</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/522">ISIOLO TOWNSHIP BLOCK 3/522</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/547">ISIOLO TOWNSHIP BLOCK 3/547</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/548">ISIOLO TOWNSHIP BLOCK 3/548</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/549">ISIOLO TOWNSHIP BLOCK 3/549</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/550">ISIOLO TOWNSHIP BLOCK 3/550</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/551">ISIOLO TOWNSHIP BLOCK 3/551</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/552">ISIOLO TOWNSHIP BLOCK 3/552</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/553">ISIOLO TOWNSHIP BLOCK 3/553</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/554">ISIOLO TOWNSHIP BLOCK 3/554</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/555">ISIOLO TOWNSHIP BLOCK 3/555</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/556">ISIOLO TOWNSHIP BLOCK 3/556</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/557">ISIOLO TOWNSHIP BLOCK 3/557</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/558">ISIOLO TOWNSHIP BLOCK 3/558</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/559">ISIOLO TOWNSHIP BLOCK 3/559</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/560">ISIOLO TOWNSHIP BLOCK 3/560</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/561">ISIOLO TOWNSHIP BLOCK 3/561</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/562">ISIOLO TOWNSHIP BLOCK 3/562</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/563">ISIOLO TOWNSHIP BLOCK 3/563</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/564">ISIOLO TOWNSHIP BLOCK 3/564</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/565">ISIOLO TOWNSHIP BLOCK 3/565</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/566">ISIOLO TOWNSHIP BLOCK 3/566</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/567">ISIOLO TOWNSHIP BLOCK 3/567</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/568">ISIOLO TOWNSHIP BLOCK 3/568</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/569">ISIOLO TOWNSHIP BLOCK 3/569</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/570">ISIOLO TOWNSHIP BLOCK 3/570</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/571">ISIOLO TOWNSHIP BLOCK 3/571</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 3/572">ISIOLO TOWNSHIP BLOCK 3/572</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/10">ISIOLO TOWNSHIP BLOCK 8/10</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/100">ISIOLO TOWNSHIP BLOCK 8/100</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/101">ISIOLO TOWNSHIP BLOCK 8/101</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/102">ISIOLO TOWNSHIP BLOCK 8/102</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/103">ISIOLO TOWNSHIP BLOCK 8/103</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/104">ISIOLO TOWNSHIP BLOCK 8/104</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/105">ISIOLO TOWNSHIP BLOCK 8/105</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/106">ISIOLO TOWNSHIP BLOCK 8/106</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/107">ISIOLO TOWNSHIP BLOCK 8/107</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/108">ISIOLO TOWNSHIP BLOCK 8/108</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/11">ISIOLO TOWNSHIP BLOCK 8/11</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/110">ISIOLO TOWNSHIP BLOCK 8/110</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/111">ISIOLO TOWNSHIP BLOCK 8/111</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/112">ISIOLO TOWNSHIP BLOCK 8/112</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/113">ISIOLO TOWNSHIP BLOCK 8/113</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/114">ISIOLO TOWNSHIP BLOCK 8/114</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/115">ISIOLO TOWNSHIP BLOCK 8/115</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/116">ISIOLO TOWNSHIP BLOCK 8/116</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/117">ISIOLO TOWNSHIP BLOCK 8/117</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/118">ISIOLO TOWNSHIP BLOCK 8/118</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/119">ISIOLO TOWNSHIP BLOCK 8/119</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/12">ISIOLO TOWNSHIP BLOCK 8/12</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/120">ISIOLO TOWNSHIP BLOCK 8/120</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/121">ISIOLO TOWNSHIP BLOCK 8/121</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/122">ISIOLO TOWNSHIP BLOCK 8/122</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/123">ISIOLO TOWNSHIP BLOCK 8/123</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/124">ISIOLO TOWNSHIP BLOCK 8/124</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/125">ISIOLO TOWNSHIP BLOCK 8/125</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/126-127">ISIOLO TOWNSHIP BLOCK 8/126-127</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/128">ISIOLO TOWNSHIP BLOCK 8/128</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/129">ISIOLO TOWNSHIP BLOCK 8/129</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/13">ISIOLO TOWNSHIP BLOCK 8/13</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/130">ISIOLO TOWNSHIP BLOCK 8/130</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/131">ISIOLO TOWNSHIP BLOCK 8/131</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/132">ISIOLO TOWNSHIP BLOCK 8/132</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/133">ISIOLO TOWNSHIP BLOCK 8/133</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/134">ISIOLO TOWNSHIP BLOCK 8/134</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/135">ISIOLO TOWNSHIP BLOCK 8/135</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/136">ISIOLO TOWNSHIP BLOCK 8/136</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/137">ISIOLO TOWNSHIP BLOCK 8/137</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/138">ISIOLO TOWNSHIP BLOCK 8/138</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/139">ISIOLO TOWNSHIP BLOCK 8/139</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/14">ISIOLO TOWNSHIP BLOCK 8/14</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/140">ISIOLO TOWNSHIP BLOCK 8/140</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/141">ISIOLO TOWNSHIP BLOCK 8/141</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/142">ISIOLO TOWNSHIP BLOCK 8/142</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/143">ISIOLO TOWNSHIP BLOCK 8/143</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/144">ISIOLO TOWNSHIP BLOCK 8/144</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/145">ISIOLO TOWNSHIP BLOCK 8/145</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/146">ISIOLO TOWNSHIP BLOCK 8/146</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/147">ISIOLO TOWNSHIP BLOCK 8/147</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/148">ISIOLO TOWNSHIP BLOCK 8/148</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/149">ISIOLO TOWNSHIP BLOCK 8/149</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/15">ISIOLO TOWNSHIP BLOCK 8/15</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/150">ISIOLO TOWNSHIP BLOCK 8/150</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/151">ISIOLO TOWNSHIP BLOCK 8/151</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/152">ISIOLO TOWNSHIP BLOCK 8/152</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/153">ISIOLO TOWNSHIP BLOCK 8/153</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/154">ISIOLO TOWNSHIP BLOCK 8/154</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/155">ISIOLO TOWNSHIP BLOCK 8/155</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/156">ISIOLO TOWNSHIP BLOCK 8/156</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/157">ISIOLO TOWNSHIP BLOCK 8/157</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/158">ISIOLO TOWNSHIP BLOCK 8/158</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/159">ISIOLO TOWNSHIP BLOCK 8/159</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/16">ISIOLO TOWNSHIP BLOCK 8/16</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/160">ISIOLO TOWNSHIP BLOCK 8/160</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/161">ISIOLO TOWNSHIP BLOCK 8/161</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/162">ISIOLO TOWNSHIP BLOCK 8/162</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/163">ISIOLO TOWNSHIP BLOCK 8/163</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/164">ISIOLO TOWNSHIP BLOCK 8/164</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/165">ISIOLO TOWNSHIP BLOCK 8/165</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/166">ISIOLO TOWNSHIP BLOCK 8/166</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/167">ISIOLO TOWNSHIP BLOCK 8/167</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/168">ISIOLO TOWNSHIP BLOCK 8/168</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/169">ISIOLO TOWNSHIP BLOCK 8/169</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/17">ISIOLO TOWNSHIP BLOCK 8/17</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/170">ISIOLO TOWNSHIP BLOCK 8/170</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/171">ISIOLO TOWNSHIP BLOCK 8/171</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/172">ISIOLO TOWNSHIP BLOCK 8/172</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/173">ISIOLO TOWNSHIP BLOCK 8/173</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/174">ISIOLO TOWNSHIP BLOCK 8/174</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/175">ISIOLO TOWNSHIP BLOCK 8/175</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/176">ISIOLO TOWNSHIP BLOCK 8/176</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/177">ISIOLO TOWNSHIP BLOCK 8/177</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/178">ISIOLO TOWNSHIP BLOCK 8/178</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/18">ISIOLO TOWNSHIP BLOCK 8/18</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/180">ISIOLO TOWNSHIP BLOCK 8/180</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/181">ISIOLO TOWNSHIP BLOCK 8/181</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/182">ISIOLO TOWNSHIP BLOCK 8/182</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/183">ISIOLO TOWNSHIP BLOCK 8/183</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/184">ISIOLO TOWNSHIP BLOCK 8/184</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/185">ISIOLO TOWNSHIP BLOCK 8/185</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/186">ISIOLO TOWNSHIP BLOCK 8/186</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/187">ISIOLO TOWNSHIP BLOCK 8/187</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/188">ISIOLO TOWNSHIP BLOCK 8/188</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/189">ISIOLO TOWNSHIP BLOCK 8/189</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/19">ISIOLO TOWNSHIP BLOCK 8/19</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/190">ISIOLO TOWNSHIP BLOCK 8/190</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/191">ISIOLO TOWNSHIP BLOCK 8/191</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/192">ISIOLO TOWNSHIP BLOCK 8/192</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/193">ISIOLO TOWNSHIP BLOCK 8/193</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/194">ISIOLO TOWNSHIP BLOCK 8/194</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/195">ISIOLO TOWNSHIP BLOCK 8/195</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/196">ISIOLO TOWNSHIP BLOCK 8/196</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/197">ISIOLO TOWNSHIP BLOCK 8/197</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/198">ISIOLO TOWNSHIP BLOCK 8/198</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/199">ISIOLO TOWNSHIP BLOCK 8/199</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/2">ISIOLO TOWNSHIP BLOCK 8/2</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/20">ISIOLO TOWNSHIP BLOCK 8/20</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/200">ISIOLO TOWNSHIP BLOCK 8/200</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/201">ISIOLO TOWNSHIP BLOCK 8/201</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/202">ISIOLO TOWNSHIP BLOCK 8/202</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/203">ISIOLO TOWNSHIP BLOCK 8/203</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/204">ISIOLO TOWNSHIP BLOCK 8/204</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/205">ISIOLO TOWNSHIP BLOCK 8/205</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/206">ISIOLO TOWNSHIP BLOCK 8/206</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/207">ISIOLO TOWNSHIP BLOCK 8/207</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/208">ISIOLO TOWNSHIP BLOCK 8/208</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/209">ISIOLO TOWNSHIP BLOCK 8/209</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/21">ISIOLO TOWNSHIP BLOCK 8/21</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/210">ISIOLO TOWNSHIP BLOCK 8/210</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/211">ISIOLO TOWNSHIP BLOCK 8/211</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/212">ISIOLO TOWNSHIP BLOCK 8/212</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/213">ISIOLO TOWNSHIP BLOCK 8/213</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/214">ISIOLO TOWNSHIP BLOCK 8/214</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/215">ISIOLO TOWNSHIP BLOCK 8/215</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/216">ISIOLO TOWNSHIP BLOCK 8/216</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/217">ISIOLO TOWNSHIP BLOCK 8/217</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/218">ISIOLO TOWNSHIP BLOCK 8/218</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/219">ISIOLO TOWNSHIP BLOCK 8/219</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/22">ISIOLO TOWNSHIP BLOCK 8/22</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/220">ISIOLO TOWNSHIP BLOCK 8/220</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/221">ISIOLO TOWNSHIP BLOCK 8/221</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/222">ISIOLO TOWNSHIP BLOCK 8/222</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/223">ISIOLO TOWNSHIP BLOCK 8/223</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/224">ISIOLO TOWNSHIP BLOCK 8/224</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/225">ISIOLO TOWNSHIP BLOCK 8/225</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/226">ISIOLO TOWNSHIP BLOCK 8/226</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/227">ISIOLO TOWNSHIP BLOCK 8/227</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/228">ISIOLO TOWNSHIP BLOCK 8/228</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/229">ISIOLO TOWNSHIP BLOCK 8/229</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/23">ISIOLO TOWNSHIP BLOCK 8/23</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/230">ISIOLO TOWNSHIP BLOCK 8/230</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/231">ISIOLO TOWNSHIP BLOCK 8/231</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/232">ISIOLO TOWNSHIP BLOCK 8/232</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/233">ISIOLO TOWNSHIP BLOCK 8/233</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/234">ISIOLO TOWNSHIP BLOCK 8/234</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/24">ISIOLO TOWNSHIP BLOCK 8/24</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/25">ISIOLO TOWNSHIP BLOCK 8/25</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/26">ISIOLO TOWNSHIP BLOCK 8/26</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/27">ISIOLO TOWNSHIP BLOCK 8/27</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/28">ISIOLO TOWNSHIP BLOCK 8/28</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/29">ISIOLO TOWNSHIP BLOCK 8/29</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/3">ISIOLO TOWNSHIP BLOCK 8/3</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/30">ISIOLO TOWNSHIP BLOCK 8/30</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/31">ISIOLO TOWNSHIP BLOCK 8/31</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/32">ISIOLO TOWNSHIP BLOCK 8/32</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/33">ISIOLO TOWNSHIP BLOCK 8/33</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/34">ISIOLO TOWNSHIP BLOCK 8/34</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/35">ISIOLO TOWNSHIP BLOCK 8/35</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/36">ISIOLO TOWNSHIP BLOCK 8/36</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/37">ISIOLO TOWNSHIP BLOCK 8/37</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/38">ISIOLO TOWNSHIP BLOCK 8/38</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/39">ISIOLO TOWNSHIP BLOCK 8/39</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/4">ISIOLO TOWNSHIP BLOCK 8/4</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/40">ISIOLO TOWNSHIP BLOCK 8/40</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/41">ISIOLO TOWNSHIP BLOCK 8/41</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/42">ISIOLO TOWNSHIP BLOCK 8/42</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/43">ISIOLO TOWNSHIP BLOCK 8/43</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/44">ISIOLO TOWNSHIP BLOCK 8/44</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/45">ISIOLO TOWNSHIP BLOCK 8/45</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/46">ISIOLO TOWNSHIP BLOCK 8/46</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/47">ISIOLO TOWNSHIP BLOCK 8/47</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/48">ISIOLO TOWNSHIP BLOCK 8/48</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/49">ISIOLO TOWNSHIP BLOCK 8/49</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/5">ISIOLO TOWNSHIP BLOCK 8/5</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/50">ISIOLO TOWNSHIP BLOCK 8/50</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/51">ISIOLO TOWNSHIP BLOCK 8/51</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/52">ISIOLO TOWNSHIP BLOCK 8/52</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/53">ISIOLO TOWNSHIP BLOCK 8/53</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/54">ISIOLO TOWNSHIP BLOCK 8/54</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/55">ISIOLO TOWNSHIP BLOCK 8/55</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/56">ISIOLO TOWNSHIP BLOCK 8/56</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/57">ISIOLO TOWNSHIP BLOCK 8/57</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/58">ISIOLO TOWNSHIP BLOCK 8/58</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/59">ISIOLO TOWNSHIP BLOCK 8/59</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/6">ISIOLO TOWNSHIP BLOCK 8/6</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/60">ISIOLO TOWNSHIP BLOCK 8/60</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/61">ISIOLO TOWNSHIP BLOCK 8/61</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/62">ISIOLO TOWNSHIP BLOCK 8/62</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/63">ISIOLO TOWNSHIP BLOCK 8/63</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/64">ISIOLO TOWNSHIP BLOCK 8/64</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/65">ISIOLO TOWNSHIP BLOCK 8/65</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/66">ISIOLO TOWNSHIP BLOCK 8/66</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/67">ISIOLO TOWNSHIP BLOCK 8/67</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/68">ISIOLO TOWNSHIP BLOCK 8/68</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/69">ISIOLO TOWNSHIP BLOCK 8/69</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/7">ISIOLO TOWNSHIP BLOCK 8/7</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/70">ISIOLO TOWNSHIP BLOCK 8/70</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/71">ISIOLO TOWNSHIP BLOCK 8/71</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/72">ISIOLO TOWNSHIP BLOCK 8/72</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/73">ISIOLO TOWNSHIP BLOCK 8/73</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/74">ISIOLO TOWNSHIP BLOCK 8/74</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/75">ISIOLO TOWNSHIP BLOCK 8/75</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/76">ISIOLO TOWNSHIP BLOCK 8/76</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/77">ISIOLO TOWNSHIP BLOCK 8/77</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/78">ISIOLO TOWNSHIP BLOCK 8/78</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/79">ISIOLO TOWNSHIP BLOCK 8/79</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/8">ISIOLO TOWNSHIP BLOCK 8/8</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/80">ISIOLO TOWNSHIP BLOCK 8/80</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/81">ISIOLO TOWNSHIP BLOCK 8/81</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/82">ISIOLO TOWNSHIP BLOCK 8/82</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/83">ISIOLO TOWNSHIP BLOCK 8/83</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/84">ISIOLO TOWNSHIP BLOCK 8/84</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/85">ISIOLO TOWNSHIP BLOCK 8/85</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/86">ISIOLO TOWNSHIP BLOCK 8/86</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/87">ISIOLO TOWNSHIP BLOCK 8/87</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/88">ISIOLO TOWNSHIP BLOCK 8/88</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/89">ISIOLO TOWNSHIP BLOCK 8/89</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/9">ISIOLO TOWNSHIP BLOCK 8/9</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/90">ISIOLO TOWNSHIP BLOCK 8/90</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/91">ISIOLO TOWNSHIP BLOCK 8/91</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/92">ISIOLO TOWNSHIP BLOCK 8/92</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/93">ISIOLO TOWNSHIP BLOCK 8/93</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/94">ISIOLO TOWNSHIP BLOCK 8/94</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/95">ISIOLO TOWNSHIP BLOCK 8/95</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/96">ISIOLO TOWNSHIP BLOCK 8/96</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/97">ISIOLO TOWNSHIP BLOCK 8/97</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/98">ISIOLO TOWNSHIP BLOCK 8/98</option>';
-            Lease_No_1_options_str  += '<option value="ISIOLO TOWNSHIP BLOCK 8/99">ISIOLO TOWNSHIP BLOCK 8/99</option>';
-            Lease_No_1_options_str  += '<option value="PART OF ISIOLO TOWNSHIP BLCK 10/104">PART OF ISIOLO TOWNSHIP BLCK 10/104</option>';
-            Lease_No_1_options_str  += '<option value="PART OF ISIOLO TOWNSHIP BLOCK 8/193">PART OF ISIOLO TOWNSHIP BLOCK 8/193</option>';
-            sel_Lease_No_1.innerHTML = Lease_No_1_options_str;
-            div_Lease_No_1.appendChild(sel_Lease_No_1);
-            var lab_Lease_No_1 = document.createElement('div');
-            lab_Lease_No_1.innerHTML = 'Lease_No_1';
-            lab_Lease_No_1.className = 'filterlabel';
-            div_Lease_No_1.appendChild(lab_Lease_No_1);
-            var reset_Lease_No_1 = document.createElement('div');
-            reset_Lease_No_1.innerHTML = 'clear filter';
-            reset_Lease_No_1.className = 'filterlabel';
-            reset_Lease_No_1.onclick = function() {
-                var options = document.getElementById("sel_Lease_No_1").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_Lease_No_1.appendChild(reset_Lease_No_1);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Reg_sectio = document.createElement('div');
-            div_Reg_sectio.id = "div_Reg_sectio";
-            div_Reg_sectio.className= "filterselect";
-            document.getElementById("menu").appendChild(div_Reg_sectio);
-            sel_Reg_sectio = document.createElement('select');
-            sel_Reg_sectio.multiple = true;
-            sel_Reg_sectio.size = 1;
-            sel_Reg_sectio.id = "sel_Reg_sectio";
-            var Reg_sectio_options_str = "<option value='' unselected></option>";
-            sel_Reg_sectio.onchange = function(){filterFunc()};
-            Reg_sectio_options_str  += '<option value="Kulamawe">Kulamawe</option>';
-            sel_Reg_sectio.innerHTML = Reg_sectio_options_str;
-            div_Reg_sectio.appendChild(sel_Reg_sectio);
-            var lab_Reg_sectio = document.createElement('div');
-            lab_Reg_sectio.innerHTML = 'Reg_sectio';
-            lab_Reg_sectio.className = 'filterlabel';
-            div_Reg_sectio.appendChild(lab_Reg_sectio);
-            var reset_Reg_sectio = document.createElement('div');
-            reset_Reg_sectio.innerHTML = 'clear filter';
-            reset_Reg_sectio.className = 'filterlabel';
-            reset_Reg_sectio.onclick = function() {
-                var options = document.getElementById("sel_Reg_sectio").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_Reg_sectio.appendChild(reset_Reg_sectio);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Reg_Sectio = document.createElement('div');
-            div_Reg_Sectio.id = "div_Reg_Sectio";
-            div_Reg_Sectio.className= "filterselect";
-            document.getElementById("menu").appendChild(div_Reg_Sectio);
-            sel_Reg_Sectio = document.createElement('select');
-            sel_Reg_Sectio.multiple = true;
-            sel_Reg_Sectio.size = 7;
-            sel_Reg_Sectio.id = "sel_Reg_Sectio";
-            var Reg_Sectio_options_str = "<option value='' unselected></option>";
-            sel_Reg_Sectio.onchange = function(){filterFunc()};
-            Reg_Sectio_options_str  += '<option value="NULL">NULL</option>';
-            Reg_Sectio_options_str  += '<option value="Kambi_Bulle">Kambi_Bulle</option>';
-            Reg_Sectio_options_str  += '<option value="Kambi_Garba">Kambi_Garba</option>';
-            Reg_Sectio_options_str  += '<option value="Kiwanjani A">Kiwanjani A</option>';
-            Reg_Sectio_options_str  += '<option value="Kiwanjani B">Kiwanjani B</option>';
-            Reg_Sectio_options_str  += '<option value="Ngaremara">Ngaremara</option>';
-            Reg_Sectio_options_str  += '<option value="Oldonyiro">Oldonyiro</option>';
-            sel_Reg_Sectio.innerHTML = Reg_Sectio_options_str;
-            div_Reg_Sectio.appendChild(sel_Reg_Sectio);
-            var lab_Reg_Sectio = document.createElement('div');
-            lab_Reg_Sectio.innerHTML = 'Reg_Sectio';
-            lab_Reg_Sectio.className = 'filterlabel';
-            div_Reg_Sectio.appendChild(lab_Reg_Sectio);
-            var reset_Reg_Sectio = document.createElement('div');
-            reset_Reg_Sectio.innerHTML = 'clear filter';
-            reset_Reg_Sectio.className = 'filterlabel';
-            reset_Reg_Sectio.onclick = function() {
-                var options = document.getElementById("sel_Reg_Sectio").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_Reg_Sectio.appendChild(reset_Reg_Sectio);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_Name = document.createElement('div');
-            div_Name.id = "div_Name";
-            div_Name.className= "filterselect";
-            document.getElementById("menu").appendChild(div_Name);
-            sel_Name = document.createElement('select');
-            sel_Name.multiple = true;
-            sel_Name.size = 1;
-            sel_Name.id = "sel_Name";
-            var Name_options_str = "<option value='' unselected></option>";
-            sel_Name.onchange = function(){filterFunc()};
-            Name_options_str  += '<option value="ISIOLO">ISIOLO</option>';
-            sel_Name.innerHTML = Name_options_str;
-            div_Name.appendChild(sel_Name);
-            var lab_Name = document.createElement('div');
-            lab_Name.innerHTML = 'Name';
-            lab_Name.className = 'filterlabel';
-            div_Name.appendChild(lab_Name);
-            var reset_Name = document.createElement('div');
-            reset_Name.innerHTML = 'clear filter';
-            reset_Name.className = 'filterlabel';
-            reset_Name.onclick = function() {
-                var options = document.getElementById("sel_Name").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_Name.appendChild(reset_Name);
-            document.getElementById("menu").appendChild(
-                document.createElement("div"));
-            var div_parcel_num = document.createElement('div');
-            div_parcel_num.id = "div_parcel_num";
-            div_parcel_num.className= "filterselect";
-            document.getElementById("menu").appendChild(div_parcel_num);
-            sel_parcel_num = document.createElement('select');
-            sel_parcel_num.multiple = true;
-            sel_parcel_num.size = 10;
-            sel_parcel_num.id = "sel_parcel_num";
-            var parcel_num_options_str = "<option value='' unselected></option>";
-            sel_parcel_num.onchange = function(){filterFunc()};
-            parcel_num_options_str  += '<option value="NULL">NULL</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/176">Isiolo Township Block1/176</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/344">Isiolo Township Block1/344</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/374">Isiolo Township Block1/374</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/375">Isiolo Township Block1/375</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/376">Isiolo Township Block1/376</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/377">Isiolo Township Block1/377</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/378">Isiolo Township Block1/378</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/379">Isiolo Township Block1/379</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/381-380">Isiolo Township Block1/381-380</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/382">Isiolo Township Block1/382</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/383">Isiolo Township Block1/383</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/384">Isiolo Township Block1/384</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/385">Isiolo Township Block1/385</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/386">Isiolo Township Block1/386</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/387">Isiolo Township Block1/387</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/388">Isiolo Township Block1/388</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/389">Isiolo Township Block1/389</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/390">Isiolo Township Block1/390</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/391-392">Isiolo Township Block1/391-392</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/393">Isiolo Township Block1/393</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/394">Isiolo Township Block1/394</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/395">Isiolo Township Block1/395</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/396">Isiolo Township Block1/396</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/397">Isiolo Township Block1/397</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/398">Isiolo Township Block1/398</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/399">Isiolo Township Block1/399</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/400">Isiolo Township Block1/400</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/401">Isiolo Township Block1/401</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/402">Isiolo Township Block1/402</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/403">Isiolo Township Block1/403</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/404">Isiolo Township Block1/404</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/405">Isiolo Township Block1/405</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/406">Isiolo Township Block1/406</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/407">Isiolo Township Block1/407</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/408">Isiolo Township Block1/408</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/409">Isiolo Township Block1/409</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/410">Isiolo Township Block1/410</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/411">Isiolo Township Block1/411</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/412">Isiolo Township Block1/412</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/413">Isiolo Township Block1/413</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/414">Isiolo Township Block1/414</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/415">Isiolo Township Block1/415</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/416">Isiolo Township Block1/416</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/417">Isiolo Township Block1/417</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/418">Isiolo Township Block1/418</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/419">Isiolo Township Block1/419</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/420">Isiolo Township Block1/420</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/421-422">Isiolo Township Block1/421-422</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/423">Isiolo Township Block1/423</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/424">Isiolo Township Block1/424</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/425-426">Isiolo Township Block1/425-426</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/427-428">Isiolo Township Block1/427-428</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/429">Isiolo Township Block1/429</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/430">Isiolo Township Block1/430</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/431">Isiolo Township Block1/431</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/432">Isiolo Township Block1/432</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/433">Isiolo Township Block1/433</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/434">Isiolo Township Block1/434</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/436">Isiolo Township Block1/436</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/437">Isiolo Township Block1/437</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/438">Isiolo Township Block1/438</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/439">Isiolo Township Block1/439</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/440">Isiolo Township Block1/440</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/441">Isiolo Township Block1/441</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/442">Isiolo Township Block1/442</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/443">Isiolo Township Block1/443</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/444">Isiolo Township Block1/444</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/445">Isiolo Township Block1/445</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/446">Isiolo Township Block1/446</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/447">Isiolo Township Block1/447</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/448">Isiolo Township Block1/448</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/449">Isiolo Township Block1/449</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/450">Isiolo Township Block1/450</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/451">Isiolo Township Block1/451</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/452">Isiolo Township Block1/452</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/453">Isiolo Township Block1/453</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/454">Isiolo Township Block1/454</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/455">Isiolo Township Block1/455</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/456">Isiolo Township Block1/456</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/457">Isiolo Township Block1/457</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/458">Isiolo Township Block1/458</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/459">Isiolo Township Block1/459</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/461">Isiolo Township Block1/461</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/462">Isiolo Township Block1/462</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/463">Isiolo Township Block1/463</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/464">Isiolo Township Block1/464</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/465">Isiolo Township Block1/465</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/466">Isiolo Township Block1/466</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/467">Isiolo Township Block1/467</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/468">Isiolo Township Block1/468</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/469">Isiolo Township Block1/469</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/470">Isiolo Township Block1/470</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/471">Isiolo Township Block1/471</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/472">Isiolo Township Block1/472</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/473">Isiolo Township Block1/473</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/474">Isiolo Township Block1/474</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/475">Isiolo Township Block1/475</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/476">Isiolo Township Block1/476</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/477">Isiolo Township Block1/477</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/478">Isiolo Township Block1/478</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/479">Isiolo Township Block1/479</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/480">Isiolo Township Block1/480</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/481">Isiolo Township Block1/481</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/482">Isiolo Township Block1/482</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/483">Isiolo Township Block1/483</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/484">Isiolo Township Block1/484</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/485">Isiolo Township Block1/485</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/486">Isiolo Township Block1/486</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/488">Isiolo Township Block1/488</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/489">Isiolo Township Block1/489</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/490">Isiolo Township Block1/490</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/491">Isiolo Township Block1/491</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/492">Isiolo Township Block1/492</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/492-491">Isiolo Township Block1/492-491</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/493">Isiolo Township Block1/493</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/494">Isiolo Township Block1/494</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/495">Isiolo Township Block1/495</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/496">Isiolo Township Block1/496</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/497">Isiolo Township Block1/497</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/498">Isiolo Township Block1/498</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/499">Isiolo Township Block1/499</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/500">Isiolo Township Block1/500</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/501">Isiolo Township Block1/501</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/502">Isiolo Township Block1/502</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/503">Isiolo Township Block1/503</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/504">Isiolo Township Block1/504</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/505">Isiolo Township Block1/505</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/506">Isiolo Township Block1/506</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/507">Isiolo Township Block1/507</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/508">Isiolo Township Block1/508</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/509">Isiolo Township Block1/509</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/510">Isiolo Township Block1/510</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/511">Isiolo Township Block1/511</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/512">Isiolo Township Block1/512</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/513">Isiolo Township Block1/513</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/514">Isiolo Township Block1/514</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/515">Isiolo Township Block1/515</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/516">Isiolo Township Block1/516</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/517">Isiolo Township Block1/517</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/518">Isiolo Township Block1/518</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/519">Isiolo Township Block1/519</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/520">Isiolo Township Block1/520</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/521">Isiolo Township Block1/521</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/522">Isiolo Township Block1/522</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/523">Isiolo Township Block1/523</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/524">Isiolo Township Block1/524</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/525">Isiolo Township Block1/525</option>';
-            parcel_num_options_str  += '<option value="Isiolo Township Block1/526-435">Isiolo Township Block1/526-435</option>';
-            sel_parcel_num.innerHTML = parcel_num_options_str;
-            div_parcel_num.appendChild(sel_parcel_num);
-            var lab_parcel_num = document.createElement('div');
-            lab_parcel_num.innerHTML = 'parcel_num';
-            lab_parcel_num.className = 'filterlabel';
-            div_parcel_num.appendChild(lab_parcel_num);
-            var reset_parcel_num = document.createElement('div');
-            reset_parcel_num.innerHTML = 'clear filter';
-            reset_parcel_num.className = 'filterlabel';
-            reset_parcel_num.onclick = function() {
-                var options = document.getElementById("sel_parcel_num").options;
-                for (var i=0; i < options.length; i++) {
-                    options[i].selected = false;
-                }
-                filterFunc();
-            };
-            div_parcel_num.appendChild(reset_parcel_num);
         </script>
     </body>
 </html>
