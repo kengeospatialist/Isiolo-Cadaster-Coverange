@@ -8,10 +8,10 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
+        <link rel="stylesheet" href="css/L.Control.Locate.min.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
-        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -28,6 +28,7 @@
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
+        <script src="js/L.Control.Locate.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -36,25 +37,21 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="js/leaflet-measure.js"></script>
-        <script src="data/county_boundary_0.js"></script>
         <script src="data/ward_1.js"></script>
-        <script src="data/Tulloroba_2.js"></script>
-        <script src="data/Oldonyiro_3.js"></script>
-        <script src="data/Ngaremara_4.js"></script>
-        <script src="data/Kulamawe_5.js"></script>
-        <script src="data/Kiwanjani_B_6.js"></script>
-        <script src="data/Kiwanjani_A_7.js"></script>
-        <script src="data/Kambi_Garba_8.js"></script>
-        <script src="data/Kambi_Bulle_9.js"></script>
+        <script src="data/county_boundary_2.js"></script>
+        <script src="data/UrbanAreas_3.js"></script>
+        <script src="data/Tulloroba_4.js"></script>
+        <script src="data/Oldonyiro_5.js"></script>
+        <script src="data/Ngaremara_6.js"></script>
+        <script src="data/Kulamawe_7.js"></script>
+        <script src="data/Kiwanjani_B_8.js"></script>
+        <script src="data/Kiwanjani_A_9.js"></script>
+        <script src="data/Kambi_Garba_10.js"></script>
+        <script src="data/Kambi_Bulle_11.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
         })
-
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -89,68 +86,26 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
-        var measureControl = new L.Control.Measure({
-            position: 'topleft',
-            primaryLengthUnit: 'meters',
-            secondaryLengthUnit: 'kilometers',
-            primaryAreaUnit: 'sqmeters',
-            secondaryAreaUnit: 'hectares'
-        });
-        measureControl.addTo(map);
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0].innerHTML = '';
-        document.getElementsByClassName('leaflet-control-measure-toggle')[0].className += ' fas fa-ruler';
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
             if (bounds_group.getLayers().length) {
                 map.fitBounds(bounds_group.getBounds());
             }
         }
-        function pop_county_boundary_0(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['CountyCode'] !== null ? autolinker.link(feature.properties['CountyCode'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['KeRRA_Rg'] !== null ? autolinker.link(feature.properties['KeRRA_Rg'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_county_boundary_0_0() {
-            return {
-                pane: 'pane_county_boundary_0',
-                opacity: 1,
-                color: 'rgba(77,175,74,1.0)',
-                dashArray: '24.0,12.0',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 6.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        map.createPane('pane_county_boundary_0');
-        map.getPane('pane_county_boundary_0').style.zIndex = 400;
-        map.getPane('pane_county_boundary_0').style['mix-blend-mode'] = 'normal';
-        var layer_county_boundary_0 = new L.geoJson(json_county_boundary_0, {
+        map.createPane('pane_ESRISatellite_0');
+        map.getPane('pane_ESRISatellite_0').style.zIndex = 400;
+        var layer_ESRISatellite_0 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            pane: 'pane_ESRISatellite_0',
+            opacity: 1.0,
             attribution: '',
-            interactive: false,
-            dataVar: 'json_county_boundary_0',
-            layerName: 'layer_county_boundary_0',
-            pane: 'pane_county_boundary_0',
-            onEachFeature: pop_county_boundary_0,
-            style: style_county_boundary_0_0,
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
         });
-        bounds_group.addLayer(layer_county_boundary_0);
-        map.addLayer(layer_county_boundary_0);
+        layer_ESRISatellite_0;
+        map.addLayer(layer_ESRISatellite_0);
         function pop_ward_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -178,7 +133,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         <td colspan="2">' + (feature.properties['Hectares'] !== null ? autolinker.link(feature.properties['Hectares'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ward'] !== null ? autolinker.link(feature.properties['ward'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">ward</th>\
+                        <td>' + (feature.properties['ward'] !== null ? autolinker.link(feature.properties['ward'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['consituenc'] !== null ? autolinker.link(feature.properties['consituenc'].toLocaleString()) : '') + '</td>\
@@ -204,13 +160,13 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             return {
                 pane: 'pane_ward_1',
                 opacity: 1,
-                color: 'rgba(77,175,74,1.0)',
+                color: 'rgba(255,238,1,1.0)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
-                weight: 1.0,
+                weight: 6.0,
                 fillOpacity: 0,
-                interactive: false,
+                interactive: true,
             }
         }
         map.createPane('pane_ward_1');
@@ -218,7 +174,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         map.getPane('pane_ward_1').style['mix-blend-mode'] = 'normal';
         var layer_ward_1 = new L.geoJson(json_ward_1, {
             attribution: '',
-            interactive: false,
+            interactive: true,
             dataVar: 'json_ward_1',
             layerName: 'layer_ward_1',
             pane: 'pane_ward_1',
@@ -227,7 +183,141 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         });
         bounds_group.addLayer(layer_ward_1);
         map.addLayer(layer_ward_1);
-        function pop_Tulloroba_2(feature, layer) {
+        function pop_county_boundary_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CountyCode'] !== null ? autolinker.link(feature.properties['CountyCode'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? autolinker.link(feature.properties['Name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['KeRRA_Rg'] !== null ? autolinker.link(feature.properties['KeRRA_Rg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_county_boundary_2_0() {
+            return {
+                pane: 'pane_county_boundary_2',
+                opacity: 1,
+                color: 'rgba(77,175,74,1.0)',
+                dashArray: '28.0,14.0',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 7.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_county_boundary_2');
+        map.getPane('pane_county_boundary_2').style.zIndex = 402;
+        map.getPane('pane_county_boundary_2').style['mix-blend-mode'] = 'normal';
+        var layer_county_boundary_2 = new L.geoJson(json_county_boundary_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_county_boundary_2',
+            layerName: 'layer_county_boundary_2',
+            pane: 'pane_county_boundary_2',
+            onEachFeature: pop_county_boundary_2,
+            style: style_county_boundary_2_0,
+        });
+        bounds_group.addLayer(layer_county_boundary_2);
+        map.addLayer(layer_county_boundary_2);
+        function pop_UrbanAreas_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TYPE'] !== null ? autolinker.link(feature.properties['TYPE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['IDENT'] !== null ? autolinker.link(feature.properties['IDENT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LAT'] !== null ? autolinker.link(feature.properties['LAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LONG'] !== null ? autolinker.link(feature.properties['LONG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Y_PROJ'] !== null ? autolinker.link(feature.properties['Y_PROJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['X_PROJ'] !== null ? autolinker.link(feature.properties['X_PROJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NEW_SEG'] !== null ? autolinker.link(feature.properties['NEW_SEG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DISPLAY'] !== null ? autolinker.link(feature.properties['DISPLAY'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COLOR'] !== null ? autolinker.link(feature.properties['COLOR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ALTITUDE'] !== null ? autolinker.link(feature.properties['ALTITUDE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DEPTH'] !== null ? autolinker.link(feature.properties['DEPTH'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TEMP'] !== null ? autolinker.link(feature.properties['TEMP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIME'] !== null ? autolinker.link(feature.properties['TIME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MODEL'] !== null ? autolinker.link(feature.properties['MODEL'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FILENAME'] !== null ? autolinker.link(feature.properties['FILENAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LTIME'] !== null ? autolinker.link(feature.properties['LTIME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Area'] !== null ? autolinker.link(feature.properties['Area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_UrbanAreas_3_0() {
+            return {
+                pane: 'pane_UrbanAreas_3',
+                opacity: 1,
+                color: 'rgba(254,0,254,1.0)',
+                dashArray: '16.0,8.0,4.0,8.0',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_UrbanAreas_3');
+        map.getPane('pane_UrbanAreas_3').style.zIndex = 403;
+        map.getPane('pane_UrbanAreas_3').style['mix-blend-mode'] = 'normal';
+        var layer_UrbanAreas_3 = new L.geoJson(json_UrbanAreas_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_UrbanAreas_3',
+            layerName: 'layer_UrbanAreas_3',
+            pane: 'pane_UrbanAreas_3',
+            onEachFeature: pop_UrbanAreas_3,
+            style: style_UrbanAreas_3_0,
+        });
+        bounds_group.addLayer(layer_UrbanAreas_3);
+        map.addLayer(layer_UrbanAreas_3);
+        function pop_Tulloroba_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
@@ -255,9 +345,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Tulloroba_2_0() {
+        function style_Tulloroba_4_0() {
             return {
-                pane: 'pane_Tulloroba_2',
+                pane: 'pane_Tulloroba_4',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
@@ -268,21 +358,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 interactive: false,
             }
         }
-        map.createPane('pane_Tulloroba_2');
-        map.getPane('pane_Tulloroba_2').style.zIndex = 402;
-        map.getPane('pane_Tulloroba_2').style['mix-blend-mode'] = 'normal';
-        var layer_Tulloroba_2 = new L.geoJson(json_Tulloroba_2, {
+        map.createPane('pane_Tulloroba_4');
+        map.getPane('pane_Tulloroba_4').style.zIndex = 404;
+        map.getPane('pane_Tulloroba_4').style['mix-blend-mode'] = 'normal';
+        var layer_Tulloroba_4 = new L.geoJson(json_Tulloroba_4, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Tulloroba_2',
-            layerName: 'layer_Tulloroba_2',
-            pane: 'pane_Tulloroba_2',
-            onEachFeature: pop_Tulloroba_2,
-            style: style_Tulloroba_2_0,
+            dataVar: 'json_Tulloroba_4',
+            layerName: 'layer_Tulloroba_4',
+            pane: 'pane_Tulloroba_4',
+            onEachFeature: pop_Tulloroba_4,
+            style: style_Tulloroba_4_0,
         });
-        bounds_group.addLayer(layer_Tulloroba_2);
-        map.addLayer(layer_Tulloroba_2);
-        function pop_Oldonyiro_3(feature, layer) {
+        bounds_group.addLayer(layer_Tulloroba_4);
+        map.addLayer(layer_Tulloroba_4);
+        function pop_Oldonyiro_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
@@ -310,9 +400,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Oldonyiro_3_0() {
+        function style_Oldonyiro_5_0() {
             return {
-                pane: 'pane_Oldonyiro_3',
+                pane: 'pane_Oldonyiro_5',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
@@ -323,21 +413,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 interactive: false,
             }
         }
-        map.createPane('pane_Oldonyiro_3');
-        map.getPane('pane_Oldonyiro_3').style.zIndex = 403;
-        map.getPane('pane_Oldonyiro_3').style['mix-blend-mode'] = 'normal';
-        var layer_Oldonyiro_3 = new L.geoJson(json_Oldonyiro_3, {
+        map.createPane('pane_Oldonyiro_5');
+        map.getPane('pane_Oldonyiro_5').style.zIndex = 405;
+        map.getPane('pane_Oldonyiro_5').style['mix-blend-mode'] = 'normal';
+        var layer_Oldonyiro_5 = new L.geoJson(json_Oldonyiro_5, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Oldonyiro_3',
-            layerName: 'layer_Oldonyiro_3',
-            pane: 'pane_Oldonyiro_3',
-            onEachFeature: pop_Oldonyiro_3,
-            style: style_Oldonyiro_3_0,
+            dataVar: 'json_Oldonyiro_5',
+            layerName: 'layer_Oldonyiro_5',
+            pane: 'pane_Oldonyiro_5',
+            onEachFeature: pop_Oldonyiro_5,
+            style: style_Oldonyiro_5_0,
         });
-        bounds_group.addLayer(layer_Oldonyiro_3);
-        map.addLayer(layer_Oldonyiro_3);
-        function pop_Ngaremara_4(feature, layer) {
+        bounds_group.addLayer(layer_Oldonyiro_5);
+        map.addLayer(layer_Oldonyiro_5);
+        function pop_Ngaremara_6(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
@@ -362,9 +452,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Ngaremara_4_0() {
+        function style_Ngaremara_6_0() {
             return {
-                pane: 'pane_Ngaremara_4',
+                pane: 'pane_Ngaremara_6',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
@@ -375,21 +465,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 interactive: false,
             }
         }
-        map.createPane('pane_Ngaremara_4');
-        map.getPane('pane_Ngaremara_4').style.zIndex = 404;
-        map.getPane('pane_Ngaremara_4').style['mix-blend-mode'] = 'normal';
-        var layer_Ngaremara_4 = new L.geoJson(json_Ngaremara_4, {
+        map.createPane('pane_Ngaremara_6');
+        map.getPane('pane_Ngaremara_6').style.zIndex = 406;
+        map.getPane('pane_Ngaremara_6').style['mix-blend-mode'] = 'normal';
+        var layer_Ngaremara_6 = new L.geoJson(json_Ngaremara_6, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Ngaremara_4',
-            layerName: 'layer_Ngaremara_4',
-            pane: 'pane_Ngaremara_4',
-            onEachFeature: pop_Ngaremara_4,
-            style: style_Ngaremara_4_0,
+            dataVar: 'json_Ngaremara_6',
+            layerName: 'layer_Ngaremara_6',
+            pane: 'pane_Ngaremara_6',
+            onEachFeature: pop_Ngaremara_6,
+            style: style_Ngaremara_6_0,
         });
-        bounds_group.addLayer(layer_Ngaremara_4);
-        map.addLayer(layer_Ngaremara_4);
-        function pop_Kulamawe_5(feature, layer) {
+        bounds_group.addLayer(layer_Ngaremara_6);
+        map.addLayer(layer_Ngaremara_6);
+        function pop_Kulamawe_7(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
@@ -414,9 +504,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Kulamawe_5_0() {
+        function style_Kulamawe_7_0() {
             return {
-                pane: 'pane_Kulamawe_5',
+                pane: 'pane_Kulamawe_7',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
@@ -427,21 +517,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 interactive: false,
             }
         }
-        map.createPane('pane_Kulamawe_5');
-        map.getPane('pane_Kulamawe_5').style.zIndex = 405;
-        map.getPane('pane_Kulamawe_5').style['mix-blend-mode'] = 'normal';
-        var layer_Kulamawe_5 = new L.geoJson(json_Kulamawe_5, {
+        map.createPane('pane_Kulamawe_7');
+        map.getPane('pane_Kulamawe_7').style.zIndex = 407;
+        map.getPane('pane_Kulamawe_7').style['mix-blend-mode'] = 'normal';
+        var layer_Kulamawe_7 = new L.geoJson(json_Kulamawe_7, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Kulamawe_5',
-            layerName: 'layer_Kulamawe_5',
-            pane: 'pane_Kulamawe_5',
-            onEachFeature: pop_Kulamawe_5,
-            style: style_Kulamawe_5_0,
+            dataVar: 'json_Kulamawe_7',
+            layerName: 'layer_Kulamawe_7',
+            pane: 'pane_Kulamawe_7',
+            onEachFeature: pop_Kulamawe_7,
+            style: style_Kulamawe_7_0,
         });
-        bounds_group.addLayer(layer_Kulamawe_5);
-        map.addLayer(layer_Kulamawe_5);
-        function pop_Kiwanjani_B_6(feature, layer) {
+        bounds_group.addLayer(layer_Kulamawe_7);
+        map.addLayer(layer_Kulamawe_7);
+        function pop_Kiwanjani_B_8(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
@@ -466,9 +556,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Kiwanjani_B_6_0() {
+        function style_Kiwanjani_B_8_0() {
             return {
-                pane: 'pane_Kiwanjani_B_6',
+                pane: 'pane_Kiwanjani_B_8',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
@@ -479,21 +569,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 interactive: false,
             }
         }
-        map.createPane('pane_Kiwanjani_B_6');
-        map.getPane('pane_Kiwanjani_B_6').style.zIndex = 406;
-        map.getPane('pane_Kiwanjani_B_6').style['mix-blend-mode'] = 'normal';
-        var layer_Kiwanjani_B_6 = new L.geoJson(json_Kiwanjani_B_6, {
+        map.createPane('pane_Kiwanjani_B_8');
+        map.getPane('pane_Kiwanjani_B_8').style.zIndex = 408;
+        map.getPane('pane_Kiwanjani_B_8').style['mix-blend-mode'] = 'normal';
+        var layer_Kiwanjani_B_8 = new L.geoJson(json_Kiwanjani_B_8, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Kiwanjani_B_6',
-            layerName: 'layer_Kiwanjani_B_6',
-            pane: 'pane_Kiwanjani_B_6',
-            onEachFeature: pop_Kiwanjani_B_6,
-            style: style_Kiwanjani_B_6_0,
+            dataVar: 'json_Kiwanjani_B_8',
+            layerName: 'layer_Kiwanjani_B_8',
+            pane: 'pane_Kiwanjani_B_8',
+            onEachFeature: pop_Kiwanjani_B_8,
+            style: style_Kiwanjani_B_8_0,
         });
-        bounds_group.addLayer(layer_Kiwanjani_B_6);
-        map.addLayer(layer_Kiwanjani_B_6);
-        function pop_Kiwanjani_A_7(feature, layer) {
+        bounds_group.addLayer(layer_Kiwanjani_B_8);
+        map.addLayer(layer_Kiwanjani_B_8);
+        function pop_Kiwanjani_A_9(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
@@ -518,9 +608,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Kiwanjani_A_7_0() {
+        function style_Kiwanjani_A_9_0() {
             return {
-                pane: 'pane_Kiwanjani_A_7',
+                pane: 'pane_Kiwanjani_A_9',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
@@ -531,21 +621,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 interactive: false,
             }
         }
-        map.createPane('pane_Kiwanjani_A_7');
-        map.getPane('pane_Kiwanjani_A_7').style.zIndex = 407;
-        map.getPane('pane_Kiwanjani_A_7').style['mix-blend-mode'] = 'normal';
-        var layer_Kiwanjani_A_7 = new L.geoJson(json_Kiwanjani_A_7, {
+        map.createPane('pane_Kiwanjani_A_9');
+        map.getPane('pane_Kiwanjani_A_9').style.zIndex = 409;
+        map.getPane('pane_Kiwanjani_A_9').style['mix-blend-mode'] = 'normal';
+        var layer_Kiwanjani_A_9 = new L.geoJson(json_Kiwanjani_A_9, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Kiwanjani_A_7',
-            layerName: 'layer_Kiwanjani_A_7',
-            pane: 'pane_Kiwanjani_A_7',
-            onEachFeature: pop_Kiwanjani_A_7,
-            style: style_Kiwanjani_A_7_0,
+            dataVar: 'json_Kiwanjani_A_9',
+            layerName: 'layer_Kiwanjani_A_9',
+            pane: 'pane_Kiwanjani_A_9',
+            onEachFeature: pop_Kiwanjani_A_9,
+            style: style_Kiwanjani_A_9_0,
         });
-        bounds_group.addLayer(layer_Kiwanjani_A_7);
-        map.addLayer(layer_Kiwanjani_A_7);
-        function pop_Kambi_Garba_8(feature, layer) {
+        bounds_group.addLayer(layer_Kiwanjani_A_9);
+        map.addLayer(layer_Kiwanjani_A_9);
+        function pop_Kambi_Garba_10(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
@@ -570,9 +660,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Kambi_Garba_8_0() {
+        function style_Kambi_Garba_10_0() {
             return {
-                pane: 'pane_Kambi_Garba_8',
+                pane: 'pane_Kambi_Garba_10',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
@@ -583,21 +673,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 interactive: false,
             }
         }
-        map.createPane('pane_Kambi_Garba_8');
-        map.getPane('pane_Kambi_Garba_8').style.zIndex = 408;
-        map.getPane('pane_Kambi_Garba_8').style['mix-blend-mode'] = 'normal';
-        var layer_Kambi_Garba_8 = new L.geoJson(json_Kambi_Garba_8, {
+        map.createPane('pane_Kambi_Garba_10');
+        map.getPane('pane_Kambi_Garba_10').style.zIndex = 410;
+        map.getPane('pane_Kambi_Garba_10').style['mix-blend-mode'] = 'normal';
+        var layer_Kambi_Garba_10 = new L.geoJson(json_Kambi_Garba_10, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Kambi_Garba_8',
-            layerName: 'layer_Kambi_Garba_8',
-            pane: 'pane_Kambi_Garba_8',
-            onEachFeature: pop_Kambi_Garba_8,
-            style: style_Kambi_Garba_8_0,
+            dataVar: 'json_Kambi_Garba_10',
+            layerName: 'layer_Kambi_Garba_10',
+            pane: 'pane_Kambi_Garba_10',
+            onEachFeature: pop_Kambi_Garba_10,
+            style: style_Kambi_Garba_10_0,
         });
-        bounds_group.addLayer(layer_Kambi_Garba_8);
-        map.addLayer(layer_Kambi_Garba_8);
-        function pop_Kambi_Bulle_9(feature, layer) {
+        bounds_group.addLayer(layer_Kambi_Garba_10);
+        map.addLayer(layer_Kambi_Garba_10);
+        function pop_Kambi_Bulle_11(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
@@ -622,9 +712,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Kambi_Bulle_9_0() {
+        function style_Kambi_Bulle_11_0() {
             return {
-                pane: 'pane_Kambi_Bulle_9',
+                pane: 'pane_Kambi_Bulle_11',
                 opacity: 1,
                 color: 'rgba(228,26,28,1.0)',
                 dashArray: '',
@@ -635,20 +725,19 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 interactive: false,
             }
         }
-        map.createPane('pane_Kambi_Bulle_9');
-        map.getPane('pane_Kambi_Bulle_9').style.zIndex = 409;
-        map.getPane('pane_Kambi_Bulle_9').style['mix-blend-mode'] = 'normal';
-        var layer_Kambi_Bulle_9 = new L.geoJson(json_Kambi_Bulle_9, {
+        map.createPane('pane_Kambi_Bulle_11');
+        map.getPane('pane_Kambi_Bulle_11').style.zIndex = 411;
+        map.getPane('pane_Kambi_Bulle_11').style['mix-blend-mode'] = 'normal';
+        var layer_Kambi_Bulle_11 = new L.geoJson(json_Kambi_Bulle_11, {
             attribution: '',
             interactive: false,
-            dataVar: 'json_Kambi_Bulle_9',
-            layerName: 'layer_Kambi_Bulle_9',
-            pane: 'pane_Kambi_Bulle_9',
-            onEachFeature: pop_Kambi_Bulle_9,
-            style: style_Kambi_Bulle_9_0,
+            dataVar: 'json_Kambi_Bulle_11',
+            layerName: 'layer_Kambi_Bulle_11',
+            pane: 'pane_Kambi_Bulle_11',
+            onEachFeature: pop_Kambi_Bulle_11,
+            style: style_Kambi_Bulle_11_0,
         });
-        bounds_group.addLayer(layer_Kambi_Bulle_9);
-        map.addLayer(layer_Kambi_Bulle_9);
+        bounds_group.addLayer(layer_Kambi_Bulle_11);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
@@ -660,16 +749,18 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
         var overlaysTree = [
-            {label: '<img src="legend/Kambi_Bulle_9.png" /> Kambi_Bulle', layer: layer_Kambi_Bulle_9},
-            {label: '<img src="legend/Kambi_Garba_8.png" /> Kambi_Garba', layer: layer_Kambi_Garba_8},
-            {label: '<img src="legend/Kiwanjani_A_7.png" /> Kiwanjani_A', layer: layer_Kiwanjani_A_7},
-            {label: '<img src="legend/Kiwanjani_B_6.png" /> Kiwanjani_B', layer: layer_Kiwanjani_B_6},
-            {label: '<img src="legend/Kulamawe_5.png" /> Kulamawe', layer: layer_Kulamawe_5},
-            {label: '<img src="legend/Ngaremara_4.png" /> Ngaremara', layer: layer_Ngaremara_4},
-            {label: '<img src="legend/Oldonyiro_3.png" /> Oldonyiro', layer: layer_Oldonyiro_3},
-            {label: '<img src="legend/Tulloroba_2.png" /> Tulloroba', layer: layer_Tulloroba_2},
+            {label: '<img src="legend/Kambi_Bulle_11.png" /> Kambi_Bulle', layer: layer_Kambi_Bulle_11},
+            {label: '<img src="legend/Kambi_Garba_10.png" /> Kambi_Garba', layer: layer_Kambi_Garba_10},
+            {label: '<img src="legend/Kiwanjani_A_9.png" /> Kiwanjani_A', layer: layer_Kiwanjani_A_9},
+            {label: '<img src="legend/Kiwanjani_B_8.png" /> Kiwanjani_B', layer: layer_Kiwanjani_B_8},
+            {label: '<img src="legend/Kulamawe_7.png" /> Kulamawe', layer: layer_Kulamawe_7},
+            {label: '<img src="legend/Ngaremara_6.png" /> Ngaremara', layer: layer_Ngaremara_6},
+            {label: '<img src="legend/Oldonyiro_5.png" /> Oldonyiro', layer: layer_Oldonyiro_5},
+            {label: '<img src="legend/Tulloroba_4.png" /> Tulloroba', layer: layer_Tulloroba_4},
+            {label: '<img src="legend/UrbanAreas_3.png" /> Urban Areas', layer: layer_UrbanAreas_3},
+            {label: '<img src="legend/county_boundary_2.png" /> county_boundary', layer: layer_county_boundary_2},
             {label: '<img src="legend/ward_1.png" /> ward', layer: layer_ward_1},
-            {label: '<img src="legend/county_boundary_0.png" /> county_boundary', layer: layer_county_boundary_0},]
+            {label: "ESRI Satellite", layer: layer_ESRISatellite_0, radioGroup: 'bm' },]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
             //selectorBack: false,
@@ -677,59 +768,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             //openedSymbol: '&#8863; &#x1f5c1;',
             //collapseAll: 'Collapse all',
             //expandAll: 'Expand all',
-            collapsed: false, 
+            collapsed: true,
         });
         lay.addTo(map);
-		document.addEventListener("DOMContentLoaded", function() {
-            // set new Layers List height which considers toggle icon
-            function newLayersListHeight() {
-                var layerScrollbarElement = document.querySelector('.leaflet-control-layers-scrollbar');
-                if (layerScrollbarElement) {
-                    var layersListElement = document.querySelector('.leaflet-control-layers-list');
-                    var originalHeight = layersListElement.style.height 
-                        || window.getComputedStyle(layersListElement).height;
-                    var newHeight = parseFloat(originalHeight) - 50;
-                    layersListElement.style.height = newHeight + 'px';
-                }
-            }
-            var isLayersListExpanded = true;
-            var controlLayersElement = document.querySelector('.leaflet-control-layers');
-            var toggleLayerControl = document.querySelector('.leaflet-control-layers-toggle');
-            // toggle Collapsed/Expanded and apply new Layers List height
-            toggleLayerControl.addEventListener('click', function() {
-                if (isLayersListExpanded) {
-                    controlLayersElement.classList.remove('leaflet-control-layers-expanded');
-                } else {
-                    controlLayersElement.classList.add('leaflet-control-layers-expanded');
-                }
-                isLayersListExpanded = !isLayersListExpanded;
-                newLayersListHeight()
-            });	
-			// apply new Layers List height if toggle layerstree
-			if (controlLayersElement) {
-				controlLayersElement.addEventListener('click', function(event) {
-					var toggleLayerHeaderPointer = event.target.closest('.leaflet-layerstree-header-pointer span');
-					if (toggleLayerHeaderPointer) {
-						newLayersListHeight();
-					}
-				});
-			}
-            // Collapsed/Expanded at Start to apply new height
-            setTimeout(function() {
-                toggleLayerControl.click();
-            }, 10);
-            setTimeout(function() {
-                toggleLayerControl.click();
-            }, 10);
-            // Collapsed touch/small screen
-            var isSmallScreen = window.innerWidth < 650;
-            if (isSmallScreen) {
-                setTimeout(function() {
-                    controlLayersElement.classList.remove('leaflet-control-layers-expanded');
-                    isLayersListExpanded = !isLayersListExpanded;
-                }, 500);
-            }  
-        });       
         setBounds();
         </script>
     </body>
